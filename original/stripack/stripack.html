@@ -1,0 +1,239 @@
+<HTML>
+
+  <HEAD>
+    <TITLE>
+      STRIPACK - Delaunay Triangulation on a Sphere
+    </TITLE>
+  </HEAD>
+
+  <BODY bgcolor="#EEEEEE" link="#CC0000" alink="#FF3300" vlink="#000055">
+
+    <H1>
+      STRIPACK - Delaunay Triangulation on a Sphere
+    </H1>
+
+    <P>
+      <B>STRIPACK</B> computes the Delaunay triangulation of a set of 
+      points on the unit sphere.
+    </P>
+
+    <P>
+      <DL>
+        <DT>
+          Reference:
+        </DT>
+        <DD>
+          Robert Renka,<BR>
+          Algorithm 772: STRIPACK, <BR>
+          Delaunay Triangulation and Voronoi Diagram on the Surface 
+            of a Sphere,<BR>
+          ACM Transactions on Mathematical Software,<BR>
+          Volume 23, Number 3, 1997.
+        </DD>
+      </DL>
+    </P>
+
+    <P>
+      <DL>
+        <DT>
+          Online reference:
+        </DT>
+        <DD>
+          <A HREF = "http://www.netlib.org/toms/772">http://www.netlib.org/toms/772</A>
+        </DD>
+      </DL>
+    </P>
+
+    <P>
+      Files you may copy include:
+      <UL>
+        <LI>
+          <A HREF = "stripack.f90">stripack.f90</A>, the source code.
+        </LI>
+        <LI>
+          <A HREF = "stripack_prb.f90">stripack_prb.f90</A>, a sample problem.
+        </LI>
+        <LI>
+          <A HREF = "stripack_prb.out">stripack_prb.out</A>, sample 
+          problem output.
+        </LI>
+        <LI>
+          <A HREF = "stripack_prb2.f90">stripack_prb2.f90</A>, a sample problem.
+        </LI>
+        <LI>
+          <A HREF = "stripack_prb2.out">stripack_prb2.out</A>, sample 
+          problem output.
+        </LI>
+        <LI>
+          <A HREF = "stripack_prb_del.eps">stripack_prb_del.eps</A>, a
+          PostScript image of the Delaunay triangulation.
+        </LI>
+        <LI>
+          <A HREF = "stripack_prb_vor.eps">stripack_prb_vor.eps</A>, a
+          PostScript image of the Voronoi diagram.
+        </LI>
+      </UL>
+    </P>
+
+    <P>
+      Double precision files you may copy include:
+      <UL>
+        <LI>
+          <A HREF = "stripackd.f90">stripackd.f90</A>, a double precision
+          version of the source code.
+        </LI>
+        <LI>
+          <A HREF = "stripackd_prb.f90">stripackd_prb.f90</A>, a double
+          precision version of the sample problem.
+        </LI>
+        <LI>
+          <A HREF = "stripackd_prb.out">stripackd_prb.out</A>, sample 
+          problem output.
+        </LI>
+        <LI>
+          <A HREF = "stripackd_prb2.f90">stripackd_prb2.f90</A>, a double
+          precision version of the sample problem.
+        </LI>
+        <LI>
+          <A HREF = "stripackd_prb2.out">stripackd_prb2.out</A>, sample 
+          problem output.
+        </LI>
+      </UL>
+    </P>
+
+    <P>
+      The list of routines includes:
+      <UL>
+        <LI>
+          <B>ARC_COSINE</B> computes the arc cosine function, with argument truncation.
+        </LI>
+        <LI>
+          <B>AREAS</B> computes the area of a spherical triangle on the unit sphere.
+        </LI>
+        <LI>
+          <B>BDYADD</B> adds a boundary node to a triangulation.
+        </LI>
+        <LI>
+          <B>BNODES</B> returns the boundary nodes of a triangulation.
+        </LI>
+        <LI>
+          <B>CIRCUM</B> returns the circumcenter of a spherical triangle.
+        </LI>
+        <LI>
+          <B>COVSPH</B> connects an exterior node to boundary nodes, covering the sphere.
+        </LI>
+        <LI>
+          <B>CRLIST</B> returns triangle circumcenters and other information.
+        </LI>
+        <LI>
+          <B>DELARC</B> deletes a boundary arc from a triangulation.
+        </LI>
+        <LI>
+          <B>DELNB</B> deletes a neighbor from the adjacency list.
+        </LI>
+        <LI>
+          <B>DELNOD</B> deletes a node from a triangulation.
+        </LI>
+        <LI>
+          <B>EDGE</B> swaps arcs to force two nodes to be adjacent.
+        </LI>
+        <LI>
+          <B>GETNP</B> gets the next nearest node to a given node.
+        </LI>
+        <LI>
+          <B>I_SWAP</B> swaps two integer values.
+        </LI>
+        <LI>
+          <B>INSERT</B> inserts K as a neighbor of N1.
+        </LI>
+        <LI>
+          <B>INSIDE</B> determines if a point is inside a polygonal region.
+        </LI>
+        <LI>
+          <B>INTADD</B> adds an interior node to a triangulation.
+        </LI>
+        <LI>
+          <B>INTSRC</B> finds the intersection of two great circles.
+        </LI>
+        <LI>
+          <B>JRAND</B> returns a random integer between 1 and N.
+        </LI>
+        <LI>
+          <B>LEFT</B> determines whether a node is to the left of a plane through the origin.
+        </LI>
+        <LI>
+          <B>LSTPTR</B> returns the index of NB in the adjacency list.
+        </LI>
+        <LI>
+          <B>NBCNT</B> returns the number of neighbors of a node.
+        </LI>
+        <LI>
+          <B>NEARND</B> returns the nearest node to a given point.
+        </LI>
+        <LI>
+          <B>OPTIM</B> optimizes the quadrilateral portion of a triangulation.
+        </LI>
+        <LI>
+          <B>R_PI</B> returns the value of pi.
+        </LI>
+        <LI>
+          <B>R3VEC_NORMALIZE</B> normalizes a list of 3D vectors to have unit Euclidean norm.
+        </LI>
+        <LI>
+          <B>SCOORD</B> converts from Cartesian to spherical coordinates.
+        </LI>
+        <LI>
+          <B>STORE</B> forces its argument to be stored.
+        </LI>
+        <LI>
+          <B>SWAP</B> replaces the diagonal arc of a quadrilateral with the other diagonal.
+        </LI>
+        <LI>
+          <B>SWPTST</B> decides whether to replace a diagonal arc by the other.
+        </LI>
+        <LI>
+          <B>TIMESTAMP</B> prints the current YMDHMS date as a time stamp.
+        </LI>
+        <LI>
+          <B>TRANS</B> transforms spherical coordinates to Cartesian coordinates.
+        </LI>
+        <LI>
+          <B>TRFIND</B> locates a point relative to a triangulation.
+        </LI>
+        <LI>
+          <B>TRLIST</B> converts a triangulation data structure to a triangle list.
+        </LI>
+        <LI>
+          <B>TRLPRT</B> prints a triangle list.
+        </LI>
+        <LI>
+          <B>TRMESH</B> creates a Delaunay triangulation on the unit sphere.
+        </LI>
+        <LI>
+          <B>TRPLOT</B> makes a PostScript image of a triangulation on a unit sphere.
+        </LI>
+        <LI>
+          <B>TRPRNT</B> prints the triangulation adjacency lists.
+        </LI>
+        <LI>
+          <B>VORONOI_POLY_COUNT</B> counts the polygons of each size in the Voronoi diagram.
+        </LI>
+        <LI>
+          <B>VRPLOT</B> makes a PostScript image of a Voronoi diagram on the unit sphere.
+        </LI>
+      </UL>
+    </P>
+
+    <P>
+      Return to the <A HREF = "../f_src.html">FORTRAN software page</A>.
+    </P>
+
+    <HR>
+
+    <I>
+      Last revised on 25 June 2002.
+    </I>
+
+  </BODY>
+
+</HTML>
