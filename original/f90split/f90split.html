@@ -1,0 +1,121 @@
+<HTML>
+
+  <HEAD>
+    <TITLE>
+      F90SPLIT - Split FORTRAN90 Source Files
+    </TITLE>
+  </HEAD>
+
+  <BODY>
+
+    <H1>
+      F90SPLIT - Split FORTRAN90 Source Files
+    </H1>
+
+    <P>
+      <B>F90SPLIT</B> is a utility that reads a FORTRAN90 source code, and
+      writes each module to a separate file with an extension of ".f90".  
+      A module is considered to be a FORTRAN BLOCKDATA, FUNCTION, MODULE, 
+      PROGRAM or SUBROUTINE unit.
+    </P>
+
+    <P>
+      This utility can be convenient when your goal is to create a
+      UNIX "AR" archive of the compiled object code.  By splitting
+      your source code up, and compiling each routine separately,
+      you end up with a library in which each compiled module is
+      individual listed and replaceable.
+    </P>
+
+    <P>
+      Files you may copy include:
+      <UL>
+        <LI>
+          <A HREF = "f90split.f90">F90SPLIT.F90</A>, the source code;
+        </LI>
+        <LI>
+          <A HREF = "f90split_prb.f90">F90SPLIT_PRB.F90</A>, a sample file 
+          to split up;
+        </LI>
+      </UL>
+    </P>
+
+    <P>
+      The list of routines includes:
+      <UL>
+        <LI>
+          <B>F90SPLIT</B> splits the modules of a FORTRAN file into separate files.
+        </LI>
+        <LI>
+          <B>CH_CAP</B> capitalizes a single character.
+        </LI>
+        <LI>
+          <B>DIGIT_TO_CH</B> returns the character representation of a decimal digit.
+        </LI>
+        <LI>
+          <B>F90_LINE_IS_BEGIN</B> determines if a line begins a FORTRAN90 module.
+        </LI>
+        <LI>
+          <B>F90_LINE_IS_END</B> determines if a line ends a FORTRAN90 module.
+        </LI>
+        <LI>
+          <B>FILE_EXT</B> determines the "extension" of a file name.
+        </LI>
+        <LI>
+          <B>GET_UNIT</B> returns a free FORTRAN unit number.
+        </LI>
+        <LI>
+          <B>I_TO_S_ZERO</B> converts an integer to a string, with zero padding.
+        </LI>
+        <LI>
+          <B>LOWER</B> returns a lowercase version of a string.
+        </LI>
+        <LI>
+          <B>S_BEFORE_SS_COPY</B> copies a string up to a given substring.
+        </LI>
+        <LI>
+          <B>S_BLANK_DELETE</B> removes blanks from a string, left justifying the remainder.
+        </LI>
+        <LI>
+          <B>S_BLANKS_DELETE</B> replaces consecutive blanks by one blank.
+        </LI>
+        <LI>
+          <B>S_CAP</B> replaces any lowercase letters by uppercase ones in a string.
+        </LI>
+        <LI>
+          <B>S_CAT</B> concatenates two strings to make a third string.
+        </LI>
+        <LI>
+          <B>S_EQI</B> is a case insensitive comparison of two strings for equality.
+        </LI>
+        <LI>
+          <B>S_INDEX_LAST</B> finds the LAST occurrence of a given substring.
+        </LI>
+        <LI>
+          <B>S_INDEXI</B> is a case-insensitive INDEX function.
+        </LI>
+        <LI>
+          <B>S_SPLIT</B> divides a string into three parts, given the middle.
+        </LI>
+        <LI>
+          <B>UPPER</B> returns an uppercase version of a string.
+        </LI>
+        <LI>
+          <B>WORD_NEXT_READ</B> "reads" words from a string, one at a time.
+        </LI>
+      </UL>
+    </P>
+
+    <P>
+      Back to <A HREF = "../f_src.html">the FORTRAN software page.</A>
+    </P>
+
+    <HR>
+
+    <I>
+      Last revised on 27 March 2001.
+    </I>
+
+  </BODY>
+
+</HTML>
