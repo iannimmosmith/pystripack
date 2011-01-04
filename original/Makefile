@@ -1,5 +1,11 @@
 FC = gfortran
 
+STRIPACK_F90S = addnod arc_cosine areas bdyadd bnodes circum covsph crlist \
+		delarc delnb delnod edge getnp insert inside intadd intrsc \
+		i_swap jrand left lstptr nbcnt nearnd optim r3vec_normalize \
+		r_pi scoord store swap swptst timestamp trans trfind trlist \
+		trlprt trmesh trplot trprnt voronoi_poly_count vrplot 
+
 %.o: %.f90
 	$(FC) $(FFLAGS) -c $< -o $@
 
@@ -11,8 +17,18 @@ clean:
 	- rm fsplit
 
 libstripack.a: stripack/stripack.f90 fsplit
+	- rm -rf temp
 	- mkdir temp
-	cd temp &&  rm * ; ../fsplit ../stripack/stripack.f90
+	cd temp && ../fsplit ../stripack/stripack.f90
+	for filename in $(STRIPACK_F90S); do \
+	$(FC) -c temp/$${filename}.f90 -o temp/$${filename}.o; \
+	done ;
+	ar qc libstripack.a temp/*.o
+	rm -rf temp
+
+stripack-test: libstripack.a stripack/stripack_prb.o
+	$(FC) -o stripack_prb stripack/stripack_prb.o -L. -lstripack
+	./stripack_prb > stripack_prb.out
 
 #foreach FILE (`ls -1 *.f90`)
 #	$(FC) -c -C -fullwarn -g -static -u $FILE

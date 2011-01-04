@@ -1,4 +1,8 @@
 *.pyc
 *.o
+*.swp
+*.a
 original/fsplit
+original/stripack_prb
 original/temp/
+
