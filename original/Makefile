@@ -15,6 +15,8 @@ fsplit: f90split/f90split.o
 clean:
 	- rm *.f90
 	- rm fsplit
+	- rm libstripack.a
+	- rm stirpack_prb*
 
 libstripack.a: stripack/stripack.f90 fsplit
 	- rm -rf temp
