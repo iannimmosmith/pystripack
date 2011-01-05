@@ -1978,11 +1978,8 @@ subroutine delnod ( k, n, x, y, z, list, lptr, lend, lnew, lwk, iwk, ier )
     return
   end if
 
-
   lwkl = lwk
-  write ( *, '(i6, i6, i6, a)' ) nnb, lwkl, nnb - 3, ' variables '
   lwk = nnb - 3
-  stop
 
   if ( lwkl < lwk ) then
     ier = 2

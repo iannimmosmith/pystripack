@@ -62,6 +62,7 @@ program stripackd_prb
   integer nt
   logical numbr
   integer nv
+  integer vnmax
   double precision p(3)
   double precision, parameter :: pltsiz = 7.5D+00
   double precision rc(2*nmax-4)
@@ -84,6 +85,11 @@ program stripackd_prb
   double precision yc(2*nmax-4)
   double precision z(nmax)
   double precision zc(2*nmax-4)
+!
+! store nmax in variable so it is mutable.  Otherwise, when nmax is used as a
+! mutable variable in subroutines, nasty errors can result in gfortran at least
+!
+  vnmax = nmax
 !
   call timestamp ( )
 
@@ -436,7 +442,7 @@ program stripackd_prb
   n1 = 1
   n2 = n
 
-  call edge ( n1, n2, x, y, z, nmax, iwk, list, lptr, lend, ier )
+  call edge ( n1, n2, x, y, z, vnmax, iwk, list, lptr, lend, ier )
 
   if ( ier /= 0 .and. ier /= 5 ) then
     write ( *, '(a)' ) ' '
@@ -460,7 +466,7 @@ program stripackd_prb
 
     do
 
-      call delnod ( nn, nn, x, y, z, list, lptr, lend, lnew, nmax, iwk, ier )
+      call delnod ( nn, nn, x, y, z, list, lptr, lend, lnew, vnmax, iwk, ier )
 
       if ( ier /= 0 .and. ier /= 5 ) then
         write ( *, '(a)' ) ' '
