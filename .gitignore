@@ -2,6 +2,9 @@
 *.o
 *.swp
 *.a
+*.so
+*.dll
+*.pyd
 original/bin/stripack*
 original/bin/fsplit
 original/out/stripack*
