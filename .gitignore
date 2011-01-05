@@ -2,7 +2,7 @@
 *.o
 *.swp
 *.a
-original/fsplit
-original/stripack_prb
-original/temp/
-
+original/bin/stripack*
+original/bin/fsplit
+original/out/stripack*
+original/tmp/
