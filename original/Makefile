@@ -1,4 +1,5 @@
 FC = gfortran
+FFLAGS = -g -Wall
 
 STRIPACK_F90S = addnod arc_cosine areas bdyadd bnodes circum covsph crlist \
 		delarc delnb delnod edge getnp insert inside intadd intrsc \
@@ -14,19 +15,20 @@ fsplit: f90split/f90split.o
 
 clean:
 	- rm *.f90
+	- rm -rf */*.o
 	- rm fsplit
 	- rm libstripack.a
 	- rm stirpack_prb*
+	- rm -rf temp
 
 libstripack.a: stripack/stripack.f90 fsplit
 	- rm -rf temp
 	- mkdir temp
 	cd temp && ../fsplit ../stripack/stripack.f90
 	for filename in $(STRIPACK_F90S); do \
-	$(FC) -c temp/$${filename}.f90 -o temp/$${filename}.o; \
+	$(FC) $(FFLAGS) -c temp/$${filename}.f90 -o temp/$${filename}.o; \
 	done ;
 	ar qc libstripack.a temp/*.o
-	rm -rf temp
 
 stripack-test: libstripack.a stripack/stripack_prb.o
 	$(FC) -o stripack_prb stripack/stripack_prb.o -L. -lstripack
