@@ -237,15 +237,7 @@ y = sc*rlat
 '''
 rlat = np.zeros(n) + 60.0
 rlat[0] = 90.
-'''
-  rlon(1) = 0.0E+00
-'''
 rlon = np.zeros(n)
-'''
-  do k = 2, n
-    rlon(k) = real ( k - 2 ) * 360.0E+00 / real ( n - 1 )
-  end do
-'''
 rlon[1:] = np.arange(n-1) * 360.0 / (n-1)
 x, y, z = sp.trans ( sc * rlat, sc * rlon)
 '''  
