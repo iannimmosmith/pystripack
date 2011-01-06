@@ -34,8 +34,8 @@ regression-tests: stripack_prb stripack_prb2 stripackd_prb stripackd_prb2
 	cd test-out && for exe in $^ ; do \
 	../test-bin/$${exe} > $${exe}.out ; \
 	done ;
-	diff test-out/stripack_prb.out original/stripack/stripack_prb.out
-	diff test-out/stripackd_prb.out original/stripack/stripackd_prb.out
+	- diff test-out/stripack_prb.out original/stripack/stripack_prb.out
+	- diff test-out/stripackd_prb.out original/stripack/stripackd_prb.out
 
 stripack_prb: original/stripack/stripack_prb.o stripack/stripack.o
 	$(FC) $^ -o test-bin/$@
