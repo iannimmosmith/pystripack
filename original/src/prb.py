@@ -235,7 +235,19 @@ y = sc*rlat
 !
   call trans ( n, y, x, x, y, z )
 '''
-sp.trans ( y[0:n], x[0:n], x, y, z,  n=9 )
+rlat = np.zeros(n) + 60.0
+rlat[0] = 90.
+'''
+  rlon(1) = 0.0E+00
+'''
+rlon = np.zeros(n)
+'''
+  do k = 2, n
+    rlon(k) = real ( k - 2 ) * 360.0E+00 / real ( n - 1 )
+  end do
+'''
+rlon[1:] = np.arange(n-1) * 360.0 / (n-1)
+x, y, z = sp.trans ( sc * rlat, sc * rlon)
 '''  
   
 !
@@ -244,7 +256,8 @@ sp.trans ( y[0:n], x[0:n], x, y, z,  n=9 )
   call trmesh ( n, x, y, z, list, lptr, lend, lnew, iwk, iwk(n+1), ds, ier )
 
 '''
-sp.trmesh ( n, x, y, z, list, lptr, lend, lnew, iwk, iwk(n+1), ds, ier )
+list, lptr, lend, lnew, ier = sp.trmesh ( x, y, z )
+assert ier == 0
 '''
   if ( ier == -2 ) then
     write ( *, '(a)' ) ' '
@@ -268,7 +281,8 @@ sp.trmesh ( n, x, y, z, list, lptr, lend, lnew, iwk, iwk(n+1), ds, ier )
 
   call trprnt ( n, rlon, rlat, z, iflag, list, lptr, lend )
 '''
-sp.trprnt ( n, rlon, rlat, z, iflag, list, lptr, lend )
+iflag = 1
+sp.trprnt ( rlon, rlat, z, iflag, list, lptr, lend )
 '''
 !
 !  Test TRLIST and TRLPRT by creating and printing a triangle list.

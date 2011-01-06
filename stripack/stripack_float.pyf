@@ -3,7 +3,7 @@
 
 python module stripack_float ! in 
     interface  ! in :stripack_float
-        subroutine addnod(nst,k,x,y,z,list,lptr,lend,lnew,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine addnod(nst,k,x,y,z,list,lptr,lend,lnew,ier) ! in :stripack_float:stripack/stripack.f90
             integer :: nst
             integer optional,check(len(x)>=k),depend(x) :: k=len(x)
             real dimension(k) :: x
@@ -15,17 +15,17 @@ python module stripack_float ! in
             integer :: lnew
             integer :: ier
         end subroutine addnod
-        function arc_cosine(c) ! in :stripack_float:original/stripack/stripack.f90
+        function arc_cosine(c) ! in :stripack_float:stripack/stripack.f90
             real :: c
             real :: arc_cosine
         end function arc_cosine
-        function areas(v1,v2,v3) ! in :stripack_float:original/stripack/stripack.f90
+        function areas(v1,v2,v3) ! in :stripack_float:stripack/stripack.f90
             real dimension(3) :: v1
             real dimension(3) :: v2
             real dimension(3) :: v3
             real :: areas
         end function areas
-        subroutine bdyadd(kk,i1,i2,list,lptr,lend,lnew) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine bdyadd(kk,i1,i2,list,lptr,lend,lnew) ! in :stripack_float:stripack/stripack.f90
             integer :: kk
             integer :: i1
             integer :: i2
@@ -34,7 +34,7 @@ python module stripack_float ! in
             integer dimension(*) :: lend
             integer :: lnew
         end subroutine bdyadd
-        subroutine bnodes(n,list,lptr,lend,nodes,nb,na,nt) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine bnodes(n,list,lptr,lend,nodes,nb,na,nt) ! in :stripack_float:stripack/stripack.f90
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
             integer dimension(6 * n - 12) :: list
             integer dimension(6 * n - 12),depend(n) :: lptr
@@ -44,14 +44,14 @@ python module stripack_float ! in
             integer :: na
             integer :: nt
         end subroutine bnodes
-        subroutine circum(v1,v2,v3,c,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine circum(v1,v2,v3,c,ier) ! in :stripack_float:stripack/stripack.f90
             real dimension(3) :: v1
             real dimension(3) :: v2
             real dimension(3) :: v3
             real dimension(3) :: c
             integer :: ier
         end subroutine circum
-        subroutine covsph(kk,n0,list,lptr,lend,lnew) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine covsph(kk,n0,list,lptr,lend,lnew) ! in :stripack_float:stripack/stripack.f90
             integer :: kk
             integer :: n0
             integer dimension(*) :: list
@@ -59,7 +59,7 @@ python module stripack_float ! in
             integer dimension(*) :: lend
             integer :: lnew
         end subroutine covsph
-        subroutine crlist(n,ncol,x,y,z,list,lend,lptr,lnew,ltri,listc,nb,xc,yc,zc,rc,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine crlist(n,ncol,x,y,z,list,lend,lptr,lnew,ltri,listc,nb,xc,yc,zc,rc,ier) ! in :stripack_float:stripack/stripack.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             integer optional,check(shape(ltri,1)==ncol),depend(ltri) :: ncol=shape(ltri,1)
             real dimension(n) :: x
@@ -78,7 +78,7 @@ python module stripack_float ! in
             real dimension(2 * n - 4),depend(n) :: rc
             integer :: ier
         end subroutine crlist
-        subroutine delarc(n,io1,io2,list,lptr,lend,lnew,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine delarc(n,io1,io2,list,lptr,lend,lnew,ier) ! in :stripack_float:stripack/stripack.f90
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
             integer :: io1
             integer :: io2
@@ -88,7 +88,7 @@ python module stripack_float ! in
             integer :: lnew
             integer :: ier
         end subroutine delarc
-        subroutine delnb(n0,nb,n,list,lptr,lend,lnew,lph) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine delnb(n0,nb,n,list,lptr,lend,lnew,lph) ! in :stripack_float:stripack/stripack.f90
             integer :: n0
             integer :: nb
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
@@ -98,7 +98,7 @@ python module stripack_float ! in
             integer :: lnew
             integer :: lph
         end subroutine delnb
-        subroutine delnod(k,n,x,y,z,list,lptr,lend,lnew,lwk,iwk,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine delnod(k,n,x,y,z,list,lptr,lend,lnew,lwk,iwk,ier) ! in :stripack_float:stripack/stripack.f90
             integer :: k
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
             real dimension(*) :: x
@@ -112,7 +112,7 @@ python module stripack_float ! in
             integer dimension(2,*) :: iwk
             integer :: ier
         end subroutine delnod
-        subroutine edge(in1,in2,x,y,z,lwk,iwk,list,lptr,lend,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine edge(in1,in2,x,y,z,lwk,iwk,list,lptr,lend,ier) ! in :stripack_float:stripack/stripack.f90
             integer :: in1
             integer :: in2
             real dimension(*) :: x
@@ -125,7 +125,7 @@ python module stripack_float ! in
             integer dimension(*) :: lend
             integer :: ier
         end subroutine edge
-        subroutine getnp(x,y,z,list,lptr,lend,l,npts,df,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine getnp(x,y,z,list,lptr,lend,l,npts,df,ier) ! in :stripack_float:stripack/stripack.f90
             real dimension(*) :: x
             real dimension(*) :: y
             real dimension(*) :: z
@@ -137,18 +137,18 @@ python module stripack_float ! in
             real :: df
             integer :: ier
         end subroutine getnp
-        subroutine i_swap(i,j) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine i_swap(i,j) ! in :stripack_float:stripack/stripack.f90
             integer :: i
             integer :: j
         end subroutine i_swap
-        subroutine insert(k,lp,list,lptr,lnew) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine insert(k,lp,list,lptr,lnew) ! in :stripack_float:stripack/stripack.f90
             integer :: k
             integer :: lp
             integer dimension(*) :: list
             integer dimension(*) :: lptr
             integer :: lnew
         end subroutine insert
-        function inside(p,lv,xv,yv,zv,nv,listv,ier) ! in :stripack_float:original/stripack/stripack.f90
+        function inside(p,lv,xv,yv,zv,nv,listv,ier) ! in :stripack_float:stripack/stripack.f90
             real dimension(3) :: p
             integer optional,check(len(xv)>=lv),depend(xv) :: lv=len(xv)
             real dimension(lv) :: xv
@@ -159,7 +159,7 @@ python module stripack_float ! in
             integer :: ier
             logical :: inside
         end function inside
-        subroutine intadd(kk,i1,i2,i3,list,lptr,lend,lnew) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine intadd(kk,i1,i2,i3,list,lptr,lend,lnew) ! in :stripack_float:stripack/stripack.f90
             integer :: kk
             integer :: i1
             integer :: i2
@@ -169,21 +169,21 @@ python module stripack_float ! in
             integer dimension(*) :: lend
             integer :: lnew
         end subroutine intadd
-        subroutine intrsc(p1,p2,cn,p,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine intrsc(p1,p2,cn,p,ier) ! in :stripack_float:stripack/stripack.f90
             real dimension(3) :: p1
             real dimension(3) :: p2
             real dimension(3) :: cn
             real dimension(3) :: p
             integer :: ier
         end subroutine intrsc
-        function jrand(n,ix,iy,iz) ! in :stripack_float:original/stripack/stripack.f90
+        function jrand(n,ix,iy,iz) ! in :stripack_float:stripack/stripack.f90
             integer :: n
             integer :: ix
             integer :: iy
             integer :: iz
             integer :: jrand
         end function jrand
-        function left(x1,y1,z1,x2,y2,z2,x0,y0,z0) ! in :stripack_float:original/stripack/stripack.f90
+        function left(x1,y1,z1,x2,y2,z2,x0,y0,z0) ! in :stripack_float:stripack/stripack.f90
             real :: x1
             real :: y1
             real :: z1
@@ -195,19 +195,19 @@ python module stripack_float ! in
             real :: z0
             logical :: left
         end function left
-        function lstptr(lpl,nb,list,lptr) ! in :stripack_float:original/stripack/stripack.f90
+        function lstptr(lpl,nb,list,lptr) ! in :stripack_float:stripack/stripack.f90
             integer :: lpl
             integer :: nb
             integer dimension(*) :: list
             integer dimension(*) :: lptr
             integer :: lstptr
         end function lstptr
-        function nbcnt(lpl,lptr) ! in :stripack_float:original/stripack/stripack.f90
+        function nbcnt(lpl,lptr) ! in :stripack_float:stripack/stripack.f90
             integer :: lpl
             integer dimension(*) :: lptr
             integer :: nbcnt
         end function nbcnt
-        function nearnd(p,ist,n,x,y,z,list,lptr,lend,al) ! in :stripack_float:original/stripack/stripack.f90
+        function nearnd(p,ist,n,x,y,z,list,lptr,lend,al) ! in :stripack_float:stripack/stripack.f90
             real dimension(3) :: p
             integer :: ist
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
@@ -220,7 +220,7 @@ python module stripack_float ! in
             real :: al
             integer :: nearnd
         end function nearnd
-        subroutine optim(x,y,z,na,list,lptr,lend,nit,iwk,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine optim(x,y,z,na,list,lptr,lend,nit,iwk,ier) ! in :stripack_float:stripack/stripack.f90
             real dimension(*) :: x
             real dimension(*) :: y
             real dimension(*) :: z
@@ -232,16 +232,16 @@ python module stripack_float ! in
             integer dimension(2,na) :: iwk
             integer :: ier
         end subroutine optim
-        function r_pi() ! in :stripack_float:original/stripack/stripack.f90
+        function r_pi() ! in :stripack_float:stripack/stripack.f90
             real :: r_pi
         end function r_pi
-        subroutine r3vec_normalize(n,x,y,z) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine r3vec_normalize(n,x,y,z) ! in :stripack_float:stripack/stripack.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             real dimension(n) :: x
             real dimension(n),depend(n) :: y
             real dimension(n),depend(n) :: z
         end subroutine r3vec_normalize
-        subroutine scoord(px,py,pz,plat,plon,pnrm) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine scoord(px,py,pz,plat,plon,pnrm) ! in :stripack_float:stripack/stripack.f90
             real :: px
             real :: py
             real :: pz
@@ -249,13 +249,13 @@ python module stripack_float ! in
             real :: plon
             real :: pnrm
         end subroutine scoord
-        function store(x) ! in :stripack_float:original/stripack/stripack.f90
+        function store(x) ! in :stripack_float:stripack/stripack.f90
             real :: x
             real :: y
             real :: store
             common /stcom/ y
         end function store
-        subroutine swap(in1,in2,io1,io2,list,lptr,lend,lp21) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine swap(in1,in2,io1,io2,list,lptr,lend,lp21) ! in :stripack_float:stripack/stripack.f90
             integer :: in1
             integer :: in2
             integer :: io1
@@ -265,7 +265,7 @@ python module stripack_float ! in
             integer dimension(*) :: lend
             integer :: lp21
         end subroutine swap
-        function swptst(n1,n2,n3,n4,x,y,z) ! in :stripack_float:original/stripack/stripack.f90
+        function swptst(n1,n2,n3,n4,x,y,z) ! in :stripack_float:stripack/stripack.f90
             integer :: n1
             integer :: n2
             integer :: n3
@@ -275,9 +275,9 @@ python module stripack_float ! in
             real dimension(*) :: z
             logical :: swptst
         end function swptst
-        subroutine timestamp ! in :stripack_float:original/stripack/stripack.f90
+        subroutine timestamp ! in :stripack_float:stripack/stripack.f90
         end subroutine timestamp
-        subroutine trans(n,rlat,rlon,x,y,z) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine trans(n,rlat,rlon,x,y,z) ! in :stripack_float:stripack/stripack.f90
             integer optional,check(len(rlat)>=n),depend(rlat) :: n=len(rlat)
             real dimension(n) :: rlat
             real dimension(n),depend(n) :: rlon
@@ -285,7 +285,7 @@ python module stripack_float ! in
             real dimension(n),depend(n) :: y
             real dimension(n),depend(n) :: z
         end subroutine trans
-        subroutine trfind(nst,p,n,x,y,z,list,lptr,lend,b1,b2,b3,i1,i2,i3) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine trfind(nst,p,n,x,y,z,list,lptr,lend,b1,b2,b3,i1,i2,i3) ! in :stripack_float:stripack/stripack.f90
             integer :: nst
             real dimension(3) :: p
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
@@ -302,7 +302,7 @@ python module stripack_float ! in
             integer :: i2
             integer :: i3
         end subroutine trfind
-        subroutine trlist(n,list,lptr,lend,nrow,nt,ltri,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine trlist(n,list,lptr,lend,nrow,nt,ltri,ier) ! in :stripack_float:stripack/stripack.f90
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
             integer dimension(6 * n - 12) :: list
             integer dimension(6 * n - 12),depend(n) :: lptr
@@ -312,7 +312,7 @@ python module stripack_float ! in
             integer dimension(nrow,*) :: ltri
             integer :: ier
         end subroutine trlist
-        subroutine trlprt(n,x,y,z,iflag,nrow,nt,ltri) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine trlprt(n,x,y,z,iflag,nrow,nt,ltri) ! in :stripack_float:stripack/stripack.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             real dimension(n) :: x
             real dimension(n),depend(n) :: y
@@ -322,7 +322,7 @@ python module stripack_float ! in
             integer optional,check(shape(ltri,1)==nt),depend(ltri) :: nt=shape(ltri,1)
             integer dimension(nrow,nt) :: ltri
         end subroutine trlprt
-        subroutine trmesh(n,x,y,z,list,lptr,lend,lnew,near,next,dist,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine trmesh(n,x,y,z,list,lptr,lend,lnew,near,next,dist,ier) ! in :stripack_float:stripack/stripack.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             real dimension(n) :: x
             real dimension(n),depend(n) :: y
@@ -336,7 +336,7 @@ python module stripack_float ! in
             real dimension(n),depend(n) :: dist
             integer :: ier
         end subroutine trmesh
-        subroutine trplot(lun,pltsiz,elat,elon,a,n,x,y,z,list,lptr,lend,title,numbr,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine trplot(lun,pltsiz,elat,elon,a,n,x,y,z,list,lptr,lend,title,numbr,ier) ! in :stripack_float:stripack/stripack.f90
             integer :: lun
             real :: pltsiz
             real :: elat
@@ -353,7 +353,7 @@ python module stripack_float ! in
             logical :: numbr
             integer :: ier
         end subroutine trplot
-        subroutine trprnt(n,x,y,z,iflag,list,lptr,lend) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine trprnt(n,x,y,z,iflag,list,lptr,lend) ! in :stripack_float:stripack/stripack.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             real dimension(n) :: x
             real dimension(n),depend(n) :: y
@@ -363,13 +363,13 @@ python module stripack_float ! in
             integer dimension(6 * n - 12),depend(n) :: lptr
             integer dimension(n),depend(n) :: lend
         end subroutine trprnt
-        subroutine voronoi_poly_count(n,lend,lptr,listc) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine voronoi_poly_count(n,lend,lptr,listc) ! in :stripack_float:stripack/stripack.f90
             integer optional,check(len(lend)>=n),depend(lend) :: n=len(lend)
             integer dimension(n) :: lend
             integer dimension(6 * n - 12),depend(n) :: lptr
             integer dimension(6 * n - 12),depend(n) :: listc
         end subroutine voronoi_poly_count
-        subroutine vrplot(lun,pltsiz,elat,elon,a,n,x,y,z,nt,listc,lptr,lend,xc,yc,zc,title,numbr,ier) ! in :stripack_float:original/stripack/stripack.f90
+        subroutine vrplot(lun,pltsiz,elat,elon,a,n,x,y,z,nt,listc,lptr,lend,xc,yc,zc,title,numbr,ier) ! in :stripack_float:stripack/stripack.f90
             integer :: lun
             real :: pltsiz
             real :: elat

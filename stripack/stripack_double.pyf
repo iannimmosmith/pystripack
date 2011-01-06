@@ -3,7 +3,7 @@
 
 python module stripack_double ! in 
     interface  ! in :stripack_double
-        subroutine addnod(nst,k,x,y,z,list,lptr,lend,lnew,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine addnod(nst,k,x,y,z,list,lptr,lend,lnew,ier) ! in :stripack_double:stripack/stripackd.f90
             integer intent(in) :: nst
             integer optional,intent(in),check(len(x)>=k),depend(x) :: k=len(x)
             double precision dimension(k),intent(in) :: x
@@ -15,17 +15,17 @@ python module stripack_double ! in
             integer intent(inout) :: lnew
             integer intent(out) :: ier
         end subroutine addnod
-        function arc_cosine(c) ! in :stripack_double:original/stripack/stripackd.f90
+        function arc_cosine(c) ! in :stripack_double:stripack/stripackd.f90
             double precision intent(in) :: c
             double precision :: arc_cosine
         end function arc_cosine
-        function areas(v1,v2,v3) ! in :stripack_double:original/stripack/stripackd.f90
+        function areas(v1,v2,v3) ! in :stripack_double:stripack/stripackd.f90
             double precision dimension(3),intent(in) :: v1
             double precision dimension(3),intent(in) :: v2
             double precision dimension(3),intent(in) :: v3
             double precision :: areas
         end function areas
-        subroutine bdyadd(kk,i1,i2,list,lptr,lend,lnew) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine bdyadd(kk,i1,i2,list,lptr,lend,lnew) ! in :stripack_double:stripack/stripackd.f90
             integer intent(in) :: kk
             integer intent(in) :: i1
             integer intent(in) :: i2
@@ -34,7 +34,7 @@ python module stripack_double ! in
             integer dimension(*),intent(inout) :: lend
             integer intent(inout) :: lnew
         end subroutine bdyadd
-        subroutine bnodes(n,list,lptr,lend,nodes,nb,na,nt) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine bnodes(n,list,lptr,lend,nodes,nb,na,nt) ! in :stripack_double:stripack/stripackd.f90
             integer optional,intent(in),check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
             integer dimension(6 * n - 12),intent(in) :: list
             integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
@@ -44,14 +44,14 @@ python module stripack_double ! in
             integer intent(out) :: na
             integer intent(out) :: nt
         end subroutine bnodes
-        subroutine circum(v1,v2,v3,c,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine circum(v1,v2,v3,c,ier) ! in :stripack_double:stripack/stripackd.f90
             double precision dimension(3),intent(in) :: v1
             double precision dimension(3),intent(in) :: v2
             double precision dimension(3),intent(in) :: v3
             double precision dimension(3),intent(out) :: c
             integer intent(out) :: ier
         end subroutine circum
-        subroutine covsph(kk,n0,list,lptr,lend,lnew) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine covsph(kk,n0,list,lptr,lend,lnew) ! in :stripack_double:stripack/stripackd.f90
             integer :: kk
             integer :: n0
             integer dimension(*) :: list
@@ -59,7 +59,7 @@ python module stripack_double ! in
             integer dimension(*) :: lend
             integer :: lnew
         end subroutine covsph
-        subroutine crlist(n,ncol,x,y,z,list,lend,lptr,lnew,ltri,listc,nb,xc,yc,zc,rc,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine crlist(n,ncol,x,y,z,list,lend,lptr,lnew,ltri,listc,nb,xc,yc,zc,rc,ier) ! in :stripack_double:stripack/stripackd.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             integer optional,check(shape(ltri,1)==ncol),depend(ltri) :: ncol=shape(ltri,1)
             double precision dimension(n) :: x
@@ -78,16 +78,16 @@ python module stripack_double ! in
             double precision dimension(2 * n - 4),depend(n) :: rc
             integer :: ier
         end subroutine crlist
-        function d_pi() ! in :stripack_double:original/stripack/stripackd.f90
+        function d_pi() ! in :stripack_double:stripack/stripackd.f90
             double precision :: d_pi
         end function d_pi
-        subroutine d3vec_normalize(n,x,y,z) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine d3vec_normalize(n,x,y,z) ! in :stripack_double:stripack/stripackd.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             double precision dimension(n) :: x
             double precision dimension(n),depend(n) :: y
             double precision dimension(n),depend(n) :: z
         end subroutine d3vec_normalize
-        subroutine delarc(n,io1,io2,list,lptr,lend,lnew,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine delarc(n,io1,io2,list,lptr,lend,lnew,ier) ! in :stripack_double:stripack/stripackd.f90
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
             integer :: io1
             integer :: io2
@@ -97,7 +97,7 @@ python module stripack_double ! in
             integer :: lnew
             integer :: ier
         end subroutine delarc
-        subroutine delnb(n0,nb,n,list,lptr,lend,lnew,lph) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine delnb(n0,nb,n,list,lptr,lend,lnew,lph) ! in :stripack_double:stripack/stripackd.f90
             integer :: n0
             integer :: nb
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
@@ -107,7 +107,7 @@ python module stripack_double ! in
             integer :: lnew
             integer :: lph
         end subroutine delnb
-        subroutine delnod(k,n,x,y,z,list,lptr,lend,lnew,lwk,iwk,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine delnod(k,n,x,y,z,list,lptr,lend,lnew,lwk,iwk,ier) ! in :stripack_double:stripack/stripackd.f90
             integer :: k
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
             double precision dimension(*) :: x
@@ -121,7 +121,7 @@ python module stripack_double ! in
             integer dimension(2,*) :: iwk
             integer :: ier
         end subroutine delnod
-        subroutine edge(in1,in2,x,y,z,lwk,iwk,list,lptr,lend,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine edge(in1,in2,x,y,z,lwk,iwk,list,lptr,lend,ier) ! in :stripack_double:stripack/stripackd.f90
             integer :: in1
             integer :: in2
             double precision dimension(*) :: x
@@ -134,7 +134,7 @@ python module stripack_double ! in
             integer dimension(*) :: lend
             integer :: ier
         end subroutine edge
-        subroutine getnp(x,y,z,list,lptr,lend,l,npts,df,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine getnp(x,y,z,list,lptr,lend,l,npts,df,ier) ! in :stripack_double:stripack/stripackd.f90
             double precision dimension(*) :: x
             double precision dimension(*) :: y
             double precision dimension(*) :: z
@@ -146,18 +146,18 @@ python module stripack_double ! in
             double precision :: df
             integer :: ier
         end subroutine getnp
-        subroutine i_swap(i,j) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine i_swap(i,j) ! in :stripack_double:stripack/stripackd.f90
             integer :: i
             integer :: j
         end subroutine i_swap
-        subroutine insert(k,lp,list,lptr,lnew) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine insert(k,lp,list,lptr,lnew) ! in :stripack_double:stripack/stripackd.f90
             integer :: k
             integer :: lp
             integer dimension(*) :: list
             integer dimension(*) :: lptr
             integer :: lnew
         end subroutine insert
-        function inside(p,lv,xv,yv,zv,nv,listv,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        function inside(p,lv,xv,yv,zv,nv,listv,ier) ! in :stripack_double:stripack/stripackd.f90
             double precision dimension(3) :: p
             integer optional,check(len(xv)>=lv),depend(xv) :: lv=len(xv)
             double precision dimension(lv) :: xv
@@ -168,7 +168,7 @@ python module stripack_double ! in
             integer :: ier
             logical :: inside
         end function inside
-        subroutine intadd(kk,i1,i2,i3,list,lptr,lend,lnew) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine intadd(kk,i1,i2,i3,list,lptr,lend,lnew) ! in :stripack_double:stripack/stripackd.f90
             integer :: kk
             integer :: i1
             integer :: i2
@@ -178,21 +178,21 @@ python module stripack_double ! in
             integer dimension(*) :: lend
             integer :: lnew
         end subroutine intadd
-        subroutine intrsc(p1,p2,cn,p,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine intrsc(p1,p2,cn,p,ier) ! in :stripack_double:stripack/stripackd.f90
             double precision dimension(3) :: p1
             double precision dimension(3) :: p2
             double precision dimension(3) :: cn
             double precision dimension(3) :: p
             integer :: ier
         end subroutine intrsc
-        function jrand(n,ix,iy,iz) ! in :stripack_double:original/stripack/stripackd.f90
+        function jrand(n,ix,iy,iz) ! in :stripack_double:stripack/stripackd.f90
             integer :: n
             integer :: ix
             integer :: iy
             integer :: iz
             integer :: jrand
         end function jrand
-        function left(x1,y1,z1,x2,y2,z2,x0,y0,z0) ! in :stripack_double:original/stripack/stripackd.f90
+        function left(x1,y1,z1,x2,y2,z2,x0,y0,z0) ! in :stripack_double:stripack/stripackd.f90
             double precision :: x1
             double precision :: y1
             double precision :: z1
@@ -204,19 +204,19 @@ python module stripack_double ! in
             double precision :: z0
             logical :: left
         end function left
-        function lstptr(lpl,nb,list,lptr) ! in :stripack_double:original/stripack/stripackd.f90
+        function lstptr(lpl,nb,list,lptr) ! in :stripack_double:stripack/stripackd.f90
             integer :: lpl
             integer :: nb
             integer dimension(*) :: list
             integer dimension(*) :: lptr
             integer :: lstptr
         end function lstptr
-        function nbcnt(lpl,lptr) ! in :stripack_double:original/stripack/stripackd.f90
+        function nbcnt(lpl,lptr) ! in :stripack_double:stripack/stripackd.f90
             integer :: lpl
             integer dimension(*) :: lptr
             integer :: nbcnt
         end function nbcnt
-        function nearnd(p,ist,n,x,y,z,list,lptr,lend,al) ! in :stripack_double:original/stripack/stripackd.f90
+        function nearnd(p,ist,n,x,y,z,list,lptr,lend,al) ! in :stripack_double:stripack/stripackd.f90
             double precision dimension(3) :: p
             integer :: ist
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
@@ -229,7 +229,7 @@ python module stripack_double ! in
             double precision :: al
             integer :: nearnd
         end function nearnd
-        subroutine optim(x,y,z,na,list,lptr,lend,nit,iwk,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine optim(x,y,z,na,list,lptr,lend,nit,iwk,ier) ! in :stripack_double:stripack/stripackd.f90
             double precision dimension(*) :: x
             double precision dimension(*) :: y
             double precision dimension(*) :: z
@@ -241,7 +241,7 @@ python module stripack_double ! in
             integer dimension(2,na) :: iwk
             integer :: ier
         end subroutine optim
-        subroutine scoord(px,py,pz,plat,plon,pnrm) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine scoord(px,py,pz,plat,plon,pnrm) ! in :stripack_double:stripack/stripackd.f90
             double precision :: px
             double precision :: py
             double precision :: pz
@@ -249,13 +249,13 @@ python module stripack_double ! in
             double precision :: plon
             double precision :: pnrm
         end subroutine scoord
-        function store(x) ! in :stripack_double:original/stripack/stripackd.f90
+        function store(x) ! in :stripack_double:stripack/stripackd.f90
             double precision :: x
             double precision :: y
             double precision :: store
             common /stcom/ y
         end function store
-        subroutine swap(in1,in2,io1,io2,list,lptr,lend,lp21) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine swap(in1,in2,io1,io2,list,lptr,lend,lp21) ! in :stripack_double:stripack/stripackd.f90
             integer :: in1
             integer :: in2
             integer :: io1
@@ -265,7 +265,7 @@ python module stripack_double ! in
             integer dimension(*) :: lend
             integer :: lp21
         end subroutine swap
-        function swptst(n1,n2,n3,n4,x,y,z) ! in :stripack_double:original/stripack/stripackd.f90
+        function swptst(n1,n2,n3,n4,x,y,z) ! in :stripack_double:stripack/stripackd.f90
             integer :: n1
             integer :: n2
             integer :: n3
@@ -275,17 +275,17 @@ python module stripack_double ! in
             double precision dimension(*) :: z
             logical :: swptst
         end function swptst
-        subroutine timestamp ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine timestamp ! in :stripack_double:stripack/stripackd.f90
         end subroutine timestamp
-        subroutine trans(n,rlat,rlon,x,y,z) ! in :stripack_double:original/stripack/stripackd.f90
-            integer optional,check(len(rlat)>=n),depend(rlat) :: n=len(rlat)
-            double precision dimension(n) :: rlat
-            double precision dimension(n),depend(n) :: rlon
-            double precision dimension(n),depend(n) :: x
-            double precision dimension(n),depend(n) :: y
-            double precision dimension(n),depend(n) :: z
+        subroutine trans(n,rlat,rlon,x,y,z) ! in :stripack_double:stripack/stripackd.f90
+            integer optional,intent(in),check(len(rlat)>=n),depend(rlat) :: n=len(rlat)
+            double precision dimension(n),intent(in) :: rlat
+            double precision dimension(n),intent(in),depend(n) :: rlon
+            double precision dimension(n),intent(out),depend(n) :: x
+            double precision dimension(n),intent(out),depend(n) :: y
+            double precision dimension(n),intent(out),depend(n) :: z
         end subroutine trans
-        subroutine trfind(nst,p,n,x,y,z,list,lptr,lend,b1,b2,b3,i1,i2,i3) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine trfind(nst,p,n,x,y,z,list,lptr,lend,b1,b2,b3,i1,i2,i3) ! in :stripack_double:stripack/stripackd.f90
             integer :: nst
             double precision dimension(3) :: p
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
@@ -302,7 +302,7 @@ python module stripack_double ! in
             integer :: i2
             integer :: i3
         end subroutine trfind
-        subroutine trlist(n,list,lptr,lend,nrow,nt,ltri,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine trlist(n,list,lptr,lend,nrow,nt,ltri,ier) ! in :stripack_double:stripack/stripackd.f90
             integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
             integer dimension(6 * n - 12) :: list
             integer dimension(6 * n - 12),depend(n) :: lptr
@@ -312,7 +312,7 @@ python module stripack_double ! in
             integer dimension(nrow,*) :: ltri
             integer :: ier
         end subroutine trlist
-        subroutine trlprt(n,x,y,z,iflag,nrow,nt,ltri) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine trlprt(n,x,y,z,iflag,nrow,nt,ltri) ! in :stripack_double:stripack/stripackd.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             double precision dimension(n) :: x
             double precision dimension(n),depend(n) :: y
@@ -322,21 +322,21 @@ python module stripack_double ! in
             integer optional,check(shape(ltri,1)==nt),depend(ltri) :: nt=shape(ltri,1)
             integer dimension(nrow,nt) :: ltri
         end subroutine trlprt
-        subroutine trmesh(n,x,y,z,list,lptr,lend,lnew,near,next,dist,ier) ! in :stripack_double:original/stripack/stripackd.f90
-            integer optional,check(len(x)>=n),depend(x) :: n=len(x)
-            double precision dimension(n) :: x
-            double precision dimension(n),depend(n) :: y
-            double precision dimension(n),depend(n) :: z
-            integer dimension(6 * n - 12),depend(n) :: list
-            integer dimension(6 * n - 12),depend(n) :: lptr
-            integer dimension(n),depend(n) :: lend
-            integer :: lnew
-            integer dimension(n),depend(n) :: near
-            integer dimension(n),depend(n) :: next
-            double precision dimension(n),depend(n) :: dist
-            integer :: ier
+        subroutine trmesh(n,x,y,z,list,lptr,lend,lnew,near,next,dist,ier) ! in :stripack_double:stripack/stripackd.f90
+            integer optional,intent(in),check(len(x)>=n),depend(x) :: n=len(x)
+            double precision dimension(n),intent(in) :: x
+            double precision dimension(n),intent(in),depend(n) :: y
+            double precision dimension(n),intent(in),depend(n) :: z
+            integer dimension(6 * n - 12),intent(out),depend(n) :: list
+            integer dimension(6 * n - 12),intent(out),depend(n) :: lptr
+            integer dimension(n),intent(out),depend(n) :: lend
+            integer intent(out) :: lnew
+            integer dimension(n),intent(hide,cache),depend(n) :: near
+            integer dimension(n),intent(hide,cache),depend(n) :: next
+            double precision dimension(n),intent(hide,cache),depend(n) :: dist
+            integer intent(out) :: ier
         end subroutine trmesh
-        subroutine trplot(lun,pltsiz,elat,elon,a,n,x,y,z,list,lptr,lend,title,numbr,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine trplot(lun,pltsiz,elat,elon,a,n,x,y,z,list,lptr,lend,title,numbr,ier) ! in :stripack_double:stripack/stripackd.f90
             integer :: lun
             double precision :: pltsiz
             double precision :: elat
@@ -353,7 +353,7 @@ python module stripack_double ! in
             logical :: numbr
             integer :: ier
         end subroutine trplot
-        subroutine trprnt(n,x,y,z,iflag,list,lptr,lend) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine trprnt(n,x,y,z,iflag,list,lptr,lend) ! in :stripack_double:stripack/stripackd.f90
             integer optional,check(len(x)>=n),depend(x) :: n=len(x)
             double precision dimension(n) :: x
             double precision dimension(n),depend(n) :: y
@@ -363,13 +363,13 @@ python module stripack_double ! in
             integer dimension(6 * n - 12),depend(n) :: lptr
             integer dimension(n),depend(n) :: lend
         end subroutine trprnt
-        subroutine voronoi_poly_count(n,lend,lptr,listc) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine voronoi_poly_count(n,lend,lptr,listc) ! in :stripack_double:stripack/stripackd.f90
             integer optional,check(len(lend)>=n),depend(lend) :: n=len(lend)
             integer dimension(n) :: lend
             integer dimension(6 * n - 12),depend(n) :: lptr
             integer dimension(6 * n - 12),depend(n) :: listc
         end subroutine voronoi_poly_count
-        subroutine vrplot(lun,pltsiz,elat,elon,a,n,x,y,z,nt,listc,lptr,lend,xc,yc,zc,title,numbr,ier) ! in :stripack_double:original/stripack/stripackd.f90
+        subroutine vrplot(lun,pltsiz,elat,elon,a,n,x,y,z,nt,listc,lptr,lend,xc,yc,zc,title,numbr,ier) ! in :stripack_double:stripack/stripackd.f90
             integer :: lun
             double precision :: pltsiz
             double precision :: elat

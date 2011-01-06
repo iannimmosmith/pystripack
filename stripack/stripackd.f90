@@ -5077,18 +5077,18 @@ subroutine trans ( n, rlat, rlon, x, y, z )
 !
   implicit none
 !
-  integer n
+  integer, intent (in) :: n
+  double precision, intent (in) :: rlat(n)
+  double precision, intent (in) :: rlon(n)
+  double precision, intent (out) :: x(n)
+  double precision, intent (out) :: y(n)
+  double precision, intent (out) :: z(n)
 !
   double precision cosphi
   integer i
   integer nn
   double precision phi
-  double precision rlat(n)
-  double precision rlon(n)
   double precision theta
-  double precision x(n)
-  double precision y(n)
-  double precision z(n)
 !
   nn = n
 
@@ -6279,32 +6279,37 @@ subroutine trmesh ( n, x, y, z, list, lptr, lend, lnew, near, next, dist, ier )
 !
   implicit none
 !
-  integer n
+  integer, intent (in) :: n
+  double precision, intent (in) :: x(n)
+  double precision, intent (in) :: y(n)
+  double precision, intent (in) :: z(n)
+  integer, intent (out) :: list(6*(n-2))
+  integer, intent (out) :: lptr(6*(n-2))
+  integer, intent (out) :: lend(n)
+  integer, intent (out) :: lnew
+! workspace variables
+  integer near(n)
+  integer next(n)
+  double precision dist(n)
+! Tell f2py these are workspace variables
+!f2py integer, intent(hide, cache) :: near
+!f2py integer, intent(hide, cache) :: next
+!f2py double precision, intent(hide, cache) :: dist
+  integer, intent (out) :: ier
 !
   double precision d
   double precision d1
   double precision d2
   double precision d3
-  double precision dist(n)
   integer i
   integer i0
-  integer ier
   integer j
   integer k
   logical left
-  integer lend(n)
-  integer list(6*(n-2))
-  integer lnew
   integer lp
   integer lpl
-  integer lptr(6*(n-2))
-  integer near(n)
-  integer next(n)
   integer nexti
   integer nn
-  double precision x(n)
-  double precision y(n)
-  double precision z(n)
 !
   nn = n
 
