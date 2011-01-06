@@ -4,52 +4,52 @@
 python module stripack_double ! in 
     interface  ! in :stripack_double
         subroutine addnod(nst,k,x,y,z,list,lptr,lend,lnew,ier) ! in :stripack_double:original/stripack/stripackd.f90
-            integer :: nst
-            integer optional,check(len(x)>=k),depend(x) :: k=len(x)
-            double precision dimension(k) :: x
-            double precision dimension(k),depend(k) :: y
-            double precision dimension(k),depend(k) :: z
-            integer dimension(*) :: list
-            integer dimension(*) :: lptr
-            integer dimension(k),depend(k) :: lend
-            integer :: lnew
-            integer :: ier
+            integer intent(in) :: nst
+            integer optional,intent(in),check(len(x)>=k),depend(x) :: k=len(x)
+            double precision dimension(k),intent(in) :: x
+            double precision dimension(k),intent(in),depend(k) :: y
+            double precision dimension(k),intent(in),depend(k) :: z
+            integer dimension(*),intent(inout) :: list
+            integer dimension(*),intent(inout) :: lptr
+            integer dimension(k),intent(inout),depend(k) :: lend
+            integer intent(inout) :: lnew
+            integer intent(out) :: ier
         end subroutine addnod
         function arc_cosine(c) ! in :stripack_double:original/stripack/stripackd.f90
-            double precision :: c
+            double precision intent(in) :: c
             double precision :: arc_cosine
         end function arc_cosine
         function areas(v1,v2,v3) ! in :stripack_double:original/stripack/stripackd.f90
-            double precision dimension(3) :: v1
-            double precision dimension(3) :: v2
-            double precision dimension(3) :: v3
+            double precision dimension(3),intent(in) :: v1
+            double precision dimension(3),intent(in) :: v2
+            double precision dimension(3),intent(in) :: v3
             double precision :: areas
         end function areas
         subroutine bdyadd(kk,i1,i2,list,lptr,lend,lnew) ! in :stripack_double:original/stripack/stripackd.f90
-            integer :: kk
-            integer :: i1
-            integer :: i2
-            integer dimension(*) :: list
-            integer dimension(*) :: lptr
-            integer dimension(*) :: lend
-            integer :: lnew
+            integer intent(in) :: kk
+            integer intent(in) :: i1
+            integer intent(in) :: i2
+            integer dimension(*),intent(inout) :: list
+            integer dimension(*),intent(inout) :: lptr
+            integer dimension(*),intent(inout) :: lend
+            integer intent(inout) :: lnew
         end subroutine bdyadd
         subroutine bnodes(n,list,lptr,lend,nodes,nb,na,nt) ! in :stripack_double:original/stripack/stripackd.f90
-            integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
-            integer dimension(6 * n - 12) :: list
-            integer dimension(6 * n - 12),depend(n) :: lptr
-            integer dimension(n),depend(n) :: lend
-            integer dimension(*) :: nodes
-            integer :: nb
-            integer :: na
-            integer :: nt
+            integer optional,intent(in),check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
+            integer dimension(6 * n - 12),intent(in) :: list
+            integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
+            integer dimension(n),intent(in),depend(n) :: lend
+            integer dimension(*),intent(out) :: nodes
+            integer intent(out) :: nb
+            integer intent(out) :: na
+            integer intent(out) :: nt
         end subroutine bnodes
         subroutine circum(v1,v2,v3,c,ier) ! in :stripack_double:original/stripack/stripackd.f90
-            double precision dimension(3) :: v1
-            double precision dimension(3) :: v2
-            double precision dimension(3) :: v3
-            double precision dimension(3) :: c
-            integer :: ier
+            double precision dimension(3),intent(in) :: v1
+            double precision dimension(3),intent(in) :: v2
+            double precision dimension(3),intent(in) :: v3
+            double precision dimension(3),intent(out) :: c
+            integer intent(out) :: ier
         end subroutine circum
         subroutine covsph(kk,n0,list,lptr,lend,lnew) ! in :stripack_double:original/stripack/stripackd.f90
             integer :: kk
