@@ -303,24 +303,24 @@ python module stripack_double ! in
             integer :: i3
         end subroutine trfind
         subroutine trlist(n,list,lptr,lend,nrow,nt,ltri,ier) ! in :stripack_double:stripack/stripackd.f90
-            integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
-            integer dimension(6 * n - 12) :: list
-            integer dimension(6 * n - 12),depend(n) :: lptr
-            integer dimension(n),depend(n) :: lend
-            integer optional,check(shape(ltri,0)==nrow),depend(ltri) :: nrow=shape(ltri,0)
-            integer :: nt
-            integer dimension(nrow,*) :: ltri
-            integer :: ier
+            integer optional,intent(in),check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
+            integer dimension(6 * n - 12),intent(in) :: list
+            integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
+            integer dimension(n),intent(in),depend(n) :: lend
+            integer intent(in) :: nrow
+            integer intent(out) :: nt
+            integer dimension(nrow,2 * n - 4),intent(out),depend(nrow,n) :: ltri
+            integer intent(out) :: ier
         end subroutine trlist
         subroutine trlprt(n,x,y,z,iflag,nrow,nt,ltri) ! in :stripack_double:stripack/stripackd.f90
-            integer optional,check(len(x)>=n),depend(x) :: n=len(x)
-            double precision dimension(n) :: x
-            double precision dimension(n),depend(n) :: y
-            double precision dimension(n),depend(n) :: z
-            integer :: iflag
-            integer optional,check(shape(ltri,0)==nrow),depend(ltri) :: nrow=shape(ltri,0)
-            integer optional,check(shape(ltri,1)==nt),depend(ltri) :: nt=shape(ltri,1)
-            integer dimension(nrow,nt) :: ltri
+            integer optional,intent(in),check(len(x)>=n),depend(x) :: n=len(x)
+            double precision dimension(n),intent(in) :: x
+            double precision dimension(n),intent(in),depend(n) :: y
+            double precision dimension(n),intent(in),depend(n) :: z
+            integer intent(in) :: iflag
+            integer optional,intent(in),check(shape(ltri,0)==nrow),depend(ltri) :: nrow=shape(ltri,0)
+            integer optional,intent(in),check(shape(ltri,1)==nt),depend(ltri) :: nt=shape(ltri,1)
+            integer dimension(nrow,nt),intent(in) :: ltri
         end subroutine trlprt
         subroutine trmesh(n,x,y,z,list,lptr,lend,lnew,near,next,dist,ier) ! in :stripack_double:stripack/stripackd.f90
             integer optional,intent(in),check(len(x)>=n),depend(x) :: n=len(x)
@@ -354,13 +354,13 @@ python module stripack_double ! in
             integer :: ier
         end subroutine trplot
         subroutine trprnt(n,x,y,z,iflag,list,lptr,lend) ! in :stripack_double:stripack/stripackd.f90
-            integer optional,check(len(x)>=n),depend(x) :: n=len(x)
-            double precision dimension(n) :: x
-            double precision dimension(n),depend(n) :: y
-            double precision dimension(n),depend(n) :: z
-            integer :: iflag
-            integer dimension(6 * n - 12),depend(n) :: list
-            integer dimension(6 * n - 12),depend(n) :: lptr
+            integer optional,intent(in),check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
+            double precision dimension(n),intent(out),depend(n) :: x
+            double precision dimension(n),intent(out),depend(n) :: y
+            double precision dimension(n),intent(out),depend(n) :: z
+            integer intent(in) :: iflag
+            integer dimension(6 * n - 12),intent(in) :: list
+            integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
             integer dimension(n),depend(n) :: lend
         end subroutine trprnt
         subroutine voronoi_poly_count(n,lend,lptr,listc) ! in :stripack_double:stripack/stripackd.f90
@@ -393,5 +393,5 @@ python module stripack_double ! in
     end interface 
 end python module stripack_double
 
-! This file was auto-generated with f2py (version:1).
+! This file was auto-generated with f2py (version:2).
 ! See http://cens.ioc.ee/projects/f2py2e/

@@ -182,18 +182,16 @@ n = 9
   rlat(1) = 90.0E+00
   rlat(2:n) = 60.0E+00
 '''
+rlat = np.zeros(n) + 60.0
 rlat[0] = 90.
-rlat[1:] = 60.
 '''
   rlon(1) = 0.0E+00
-'''
-rlon[0] = 0.
-'''
   do k = 2, n
     rlon(k) = real ( k - 2 ) * 360.0E+00 / real ( n - 1 )
   end do
 '''
-rlon[1:n]=np.linspace(n-2,0,n-1)*360./(n-1)
+rlon = np.zeros(n)
+rlon[1:] = np.arange(n-1) * 360.0 / (n-1)
 '''
   if ( n < 3 .or. nmax < n ) then
     write ( *, '(a)' ) ' '
@@ -235,10 +233,6 @@ y = sc*rlat
 !
   call trans ( n, y, x, x, y, z )
 '''
-rlat = np.zeros(n) + 60.0
-rlat[0] = 90.
-rlon = np.zeros(n)
-rlon[1:] = np.arange(n-1) * 360.0 / (n-1)
 x, y, z = sp.trans ( sc * rlat, sc * rlon)
 '''  
   
@@ -274,14 +268,19 @@ assert ier == 0
   call trprnt ( n, rlon, rlat, z, iflag, list, lptr, lend )
 '''
 iflag = 1
-sp.trprnt ( rlon, rlat, z, iflag, list, lptr, lend )
+x,y,z = sp.trprnt(iflag,list,lptr,lend)
 '''
 !
 !  Test TRLIST and TRLPRT by creating and printing a triangle list.
 !
   call trlist ( n, list, lptr, lend, nrow, nt, ltri, ier )
-
+'''
+nt,ltri,ier = sp.trlist(list,lptr,lend,nrow)
+'''
   call trlprt ( n, rlon, rlat, z, iflag, nrow, nt, ltri )
+'''
+sp.trlprt(x,y,z,iflag,ltri)
+'''
 !
 !  Test TRPLOT by plotting the portion of the triangulation contained 
 !  in the hemisphere centered at E = (ELAT,ELON), where ELAT and ELON

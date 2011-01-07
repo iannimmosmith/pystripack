@@ -5693,33 +5693,33 @@ subroutine trlist ( n, list, lptr, lend, nrow, nt, ltri, ier )
 !
   implicit none
 !
-  integer n
-  integer nrow
+  integer, intent (in) :: n
+  integer, intent (in) :: nrow
 !
   logical arcs
   integer i
   integer i1
   integer i2
   integer i3
-  integer ier
+  integer, intent (out) :: ier
   integer isv
   integer j
   integer ka
   integer kn
   integer kt
-  integer lend(n)
-  integer list(6*(n-2))
+  integer, intent (in) ::  lend(n)
+  integer, intent (in) ::  list(6*(n-2))
   integer lp
   integer lp2
   integer lpl
   integer lpln1
-  integer lptr(6*(n-2))
-  integer ltri(nrow,*)
+  integer, intent (in) ::  lptr(6*(n-2))
+  integer, intent (out) :: ltri(nrow,2*n-4)
   integer n1
   integer n2
   integer n3
   integer nm2
-  integer nt
+  integer, intent (out) :: nt
 !
 !  Test for invalid input parameters.
 !
@@ -5968,22 +5968,22 @@ subroutine trlprt ( n, x, y, z, iflag, nrow, nt, ltri )
 !
   implicit none
 !
-  integer n
-  integer nrow
-  integer nt
+  integer, intent (in) :: n
+  integer, intent (in) :: nrow
+  integer, intent (in) :: nt
 !
   integer i
-  integer iflag
+  integer, intent (in) :: iflag
   integer k
-  integer ltri(nrow,nt)
+  integer, intent (in) :: ltri(nrow,nt)
   integer na
   integer nb
   integer nl
   integer, parameter :: nlmax = 58
   integer, parameter :: nmax = 9999
-  double precision x(n)
-  double precision y(n)
-  double precision z(n)
+  double precision, intent (in) :: x(n)
+  double precision, intent (in) :: y(n)
+  double precision, intent (in) :: z(n)
 !
 !  Print a heading and test for invalid input.
 !
@@ -7059,17 +7059,17 @@ subroutine trprnt ( n, x, y, z, iflag, list, lptr, lend )
 !
   implicit none
 !
-  integer n
+  integer, intent (in) :: n
 !
   integer i
-  integer iflag
+  integer, intent (in) :: iflag
   integer inc
   integer k
   integer lend(n)
-  integer list(6*(n-2))
+  integer, intent (in) :: list(6*(n-2))
   integer lp
   integer lpl
-  integer lptr(6*(n-2))
+  integer, intent (in) ::  lptr(6*(n-2))
   integer na
   integer nabor(400)
   integer nb
@@ -7080,9 +7080,9 @@ subroutine trprnt ( n, x, y, z, iflag, list, lptr, lend )
   integer nn
   integer node
   integer nt
-  double precision x(n)
-  double precision y(n)
-  double precision z(n)
+  double precision, intent (out) :: x(n)
+  double precision, intent (out) :: y(n)
+  double precision, intent (out) :: z(n)
 !
   nn = n
 !
