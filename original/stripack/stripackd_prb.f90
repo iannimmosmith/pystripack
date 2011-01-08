@@ -185,9 +185,11 @@ program stripackd_prb
 
   trplot_file_name = 'stripack_prb_del.eps'
 
-  open ( lplt, file = trplot_file_name )
+!  open ( lplt, file = trplot_file_name )
 
-  call trplot ( lplt, pltsiz, elat, elon, a, n, x, y, z, list, &
+!  call trplot ( lplt, pltsiz, elat, elon, a, n, x, y, z, list, &
+!    lptr, lend, trplot_title, numbr, ier )
+  call trplot ( trplot_file_name, pltsiz, elat, elon, a, n, x, y, z, list, &
     lptr, lend, trplot_title, numbr, ier )
 
   if ( ier == 0 ) then

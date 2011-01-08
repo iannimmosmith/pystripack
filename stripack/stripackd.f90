@@ -607,7 +607,7 @@ subroutine bnodes ( n, list, lptr, lend, nodes, nb, na, nt )
   integer, intent (in) :: list(6*(n-2))
   integer, intent (in) :: lptr(6*(n-2))
   integer, intent (in) :: lend(n)
-  integer, intent (out) :: nodes(*)
+  integer, intent (out) :: nodes(n)
   integer, intent (out) :: nb
   integer, intent (out) :: nt
   integer, intent (out) :: na
@@ -3141,21 +3141,21 @@ subroutine getnp ( x, y, z, list, lptr, lend, l, npts, df, ier )
 !
   integer l
 !
-  double precision df
+  double precision, intent (out) :: df
   double precision dnb
   double precision dnp
   integer i
-  integer ier
+  integer, intent (out) :: ier
   integer lend(*)
   integer list(*)
   integer lp
   integer lpl
-  integer lptr(*)
+  integer, intent (in) :: lptr(*)
   integer n1
   integer nb
   integer ni
   integer np
-  integer npts(l)
+  integer, intent(inout) :: npts(l)
   double precision x(*)
   double precision x1
   double precision y(*)
@@ -6546,8 +6546,11 @@ subroutine trmesh ( n, x, y, z, list, lptr, lend, lnew, near, next, dist, ier )
 
   return
 end
-subroutine trplot ( lun, pltsiz, elat, elon, a, n, x, y, z, list, lptr, &
+!subroutine trplot ( lun, pltsiz, elat, elon, a, n, x, y, z, list, lptr, &
+!  lend, title, numbr, ier )
+subroutine trplot ( filename, pltsiz, elat, elon, a, n, x, y, z, list, lptr, &
   lend, title, numbr, ier )
+! The input LUN is dropped in preference for the output filename which we will OPEN here 
 !
 !*******************************************************************************
 !
@@ -6663,35 +6666,36 @@ subroutine trplot ( lun, pltsiz, elat, elon, a, n, x, y, z, list, lptr, &
 !
   implicit none
 !
-  integer n
+  integer, intent (in) :: n
 !
   double precision a
   logical, parameter :: annot = .true.
   double precision cf
   double precision ct
-  double precision elat
-  double precision elon
+  double precision, intent (in) :: elat
+  double precision, intent (in) :: elon
   double precision ex
   double precision ey
   double precision ez
+  character ( len = * ), intent (in) :: filename
   double precision, parameter :: fsizn = 10.0D+00
   double precision, parameter :: fsizt = 16.0D+00
-  integer ier
+  integer, intent (out) :: ier
   integer ipx1
   integer ipx2
   integer ipy1
   integer ipy2
   integer ir
-  integer lend(n)
-  integer list(6*(n-2))
+  integer, intent (in) :: lend(n)
+  integer, intent (in) :: list(6*(n-2))
   integer lp
   integer lpl
-  integer lptr(6*(n-2))
-  integer lun
+  integer, intent (in) :: lptr(6*(n-2))
+  integer, parameter :: lun = 7
   integer n0
   integer n1
   logical numbr
-  double precision pltsiz
+  double precision, intent (in) :: pltsiz
   double precision r11
   double precision r12
   double precision r21
@@ -6699,18 +6703,18 @@ subroutine trplot ( lun, pltsiz, elat, elon, a, n, x, y, z, list, lptr, &
   double precision r23
   double precision sf
   double precision t
-  character ( len = * ) title
+  character ( len = * ), intent (in) :: title
   double precision tx
   double precision ty
   double precision wr
   double precision wrs
-  double precision x(n)
+  double precision, intent (in) :: x(n)
   double precision x0
   double precision x1
-  double precision y(n)
+  double precision, intent (in) :: y(n)
   double precision y0
   double precision y1
-  double precision z(n)
+  double precision, intent (in) :: z(n)
   double precision z0
   double precision z1
 !
@@ -6718,6 +6722,7 @@ subroutine trplot ( lun, pltsiz, elat, elon, a, n, x, y, z, list, lptr, &
 !
 !  Test for invalid parameters.
 !
+  open( lun, file=filename )
   if ( lun < 0 ) then
     ier = 1
     return
@@ -7080,9 +7085,9 @@ subroutine trprnt ( n, x, y, z, iflag, list, lptr, lend )
   integer nn
   integer node
   integer nt
-  double precision, intent (out) :: x(n)
-  double precision, intent (out) :: y(n)
-  double precision, intent (out) :: z(n)
+  double precision, intent (in) :: x(n)
+  double precision, intent (in) :: y(n)
+  double precision, intent (in) :: z(n)
 !
   nn = n
 !

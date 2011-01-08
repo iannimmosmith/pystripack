@@ -39,7 +39,7 @@ python module stripack_double ! in
             integer dimension(6 * n - 12),intent(in) :: list
             integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
             integer dimension(n),intent(in),depend(n) :: lend
-            integer dimension(*),intent(out) :: nodes
+            integer dimension(n),intent(out),depend(n) :: nodes
             integer intent(out) :: nb
             integer intent(out) :: na
             integer intent(out) :: nt
@@ -139,12 +139,12 @@ python module stripack_double ! in
             double precision dimension(*) :: y
             double precision dimension(*) :: z
             integer dimension(*) :: list
-            integer dimension(*) :: lptr
+            integer dimension(*),intent(in) :: lptr
             integer dimension(*) :: lend
             integer optional,check(len(npts)>=l),depend(npts) :: l=len(npts)
-            integer dimension(l) :: npts
-            double precision :: df
-            integer :: ier
+            integer dimension(l),intent(inout) :: npts
+            double precision intent(out) :: df
+            integer intent(out) :: ier
         end subroutine getnp
         subroutine i_swap(i,j) ! in :stripack_double:stripack/stripackd.f90
             integer :: i
@@ -336,30 +336,30 @@ python module stripack_double ! in
             double precision dimension(n),intent(hide,cache),depend(n) :: dist
             integer intent(out) :: ier
         end subroutine trmesh
-        subroutine trplot(lun,pltsiz,elat,elon,a,n,x,y,z,list,lptr,lend,title,numbr,ier) ! in :stripack_double:stripack/stripackd.f90
-            integer :: lun
-            double precision :: pltsiz
-            double precision :: elat
-            double precision :: elon
+        subroutine trplot(filename,pltsiz,elat,elon,a,n,x,y,z,list,lptr,lend,title,numbr,ier) ! in :stripack_double:stripack/stripackd.f90
+            character*(*) intent(in) :: filename
+            double precision intent(in) :: pltsiz
+            double precision intent(in) :: elat
+            double precision intent(in) :: elon
             double precision :: a
-            integer optional,check(len(x)>=n),depend(x) :: n=len(x)
-            double precision dimension(n) :: x
-            double precision dimension(n),depend(n) :: y
-            double precision dimension(n),depend(n) :: z
-            integer dimension(6 * n - 12),depend(n) :: list
-            integer dimension(6 * n - 12),depend(n) :: lptr
-            integer dimension(n),depend(n) :: lend
-            character*(*) :: title
+            integer optional,intent(in),check(len(x)>=n),depend(x) :: n=len(x)
+            double precision dimension(n),intent(in) :: x
+            double precision dimension(n),intent(in),depend(n) :: y
+            double precision dimension(n),intent(in),depend(n) :: z
+            integer dimension(6 * n - 12),intent(in),depend(n) :: list
+            integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
+            integer dimension(n),intent(in),depend(n) :: lend
+            character*(*) intent(in) :: title
             logical :: numbr
-            integer :: ier
+            integer intent(out) :: ier
         end subroutine trplot
         subroutine trprnt(n,x,y,z,iflag,list,lptr,lend) ! in :stripack_double:stripack/stripackd.f90
-            integer optional,intent(in),check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
-            double precision dimension(n),intent(out),depend(n) :: x
-            double precision dimension(n),intent(out),depend(n) :: y
-            double precision dimension(n),intent(out),depend(n) :: z
+            integer optional,intent(in),check(len(x)>=n),depend(x) :: n=len(x)
+            double precision dimension(n),intent(in) :: x
+            double precision dimension(n),intent(in),depend(n) :: y
+            double precision dimension(n),intent(in),depend(n) :: z
             integer intent(in) :: iflag
-            integer dimension(6 * n - 12),intent(in) :: list
+            integer dimension(6 * n - 12),intent(in),depend(n) :: list
             integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
             integer dimension(n),depend(n) :: lend
         end subroutine trprnt
