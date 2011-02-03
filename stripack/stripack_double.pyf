@@ -60,23 +60,23 @@ python module stripack_double ! in
             integer :: lnew
         end subroutine covsph
         subroutine crlist(n,ncol,x,y,z,list,lend,lptr,lnew,ltri,listc,nb,xc,yc,zc,rc,ier) ! in :stripack_double:stripack/stripackd.f90
-            integer optional,check(len(x)>=n),depend(x) :: n=len(x)
-            integer optional,check(shape(ltri,1)==ncol),depend(ltri) :: ncol=shape(ltri,1)
-            double precision dimension(n) :: x
-            double precision dimension(n),depend(n) :: y
-            double precision dimension(n),depend(n) :: z
-            integer dimension(6 * n - 12),depend(n) :: list
-            integer dimension(n),depend(n) :: lend
-            integer dimension(6 * n - 12),depend(n) :: lptr
-            integer :: lnew
-            integer dimension(6,ncol) :: ltri
-            integer dimension(6 * n - 12),depend(n) :: listc
-            integer :: nb
-            double precision dimension(2 * n - 4),depend(n) :: xc
-            double precision dimension(2 * n - 4),depend(n) :: yc
-            double precision dimension(2 * n - 4),depend(n) :: zc
-            double precision dimension(2 * n - 4),depend(n) :: rc
-            integer :: ier
+            integer optional,intent(in),check(len(x)>=n),depend(x) :: n=len(x)
+            integer intent(in) :: ncol
+            double precision dimension(n),intent(in) :: x
+            double precision dimension(n),intent(in),depend(n) :: y
+            double precision dimension(n),intent(in),depend(n) :: z
+            integer dimension(6 * n - 12),intent(in),depend(n) :: list
+            integer dimension(n),intent(in),depend(n) :: lend
+            integer dimension(6 * n - 12),intent(inout),depend(n) :: lptr
+            integer intent(inout) :: lnew
+            integer dimension(6,ncol),intent(out),depend(ncol) :: ltri
+            integer dimension(6 * n - 12),intent(out),depend(n) :: listc
+            integer intent(out) :: nb
+            double precision dimension(2 * n - 4),intent(out),depend(n) :: xc
+            double precision dimension(2 * n - 4),intent(out),depend(n) :: yc
+            double precision dimension(2 * n - 4),intent(out),depend(n) :: zc
+            double precision dimension(2 * n - 4),intent(out),depend(n) :: rc
+            integer intent(out) :: ier
         end subroutine crlist
         function d_pi() ! in :stripack_double:stripack/stripackd.f90
             double precision :: d_pi
@@ -88,14 +88,14 @@ python module stripack_double ! in
             double precision dimension(n),depend(n) :: z
         end subroutine d3vec_normalize
         subroutine delarc(n,io1,io2,list,lptr,lend,lnew,ier) ! in :stripack_double:stripack/stripackd.f90
-            integer optional,check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
-            integer :: io1
-            integer :: io2
-            integer dimension(6 * n - 12) :: list
-            integer dimension(6 * n - 12),depend(n) :: lptr
-            integer dimension(n),depend(n) :: lend
-            integer :: lnew
-            integer :: ier
+            integer optional,intent(in),check((len(list)+12)/(6)>=n),depend(list) :: n=(len(list)+12)/(6)
+            integer intent(in) :: io1
+            integer intent(in) :: io2
+            integer dimension(6 * n - 12),intent(in,out) :: list
+            integer dimension(6 * n - 12),intent(in,out),depend(n) :: lptr
+            integer dimension(n),intent(in,out),depend(n) :: lend
+            integer intent(in,out) :: lnew
+            integer intent(out) :: ier
         end subroutine delarc
         subroutine delnb(n0,nb,n,list,lptr,lend,lnew,lph) ! in :stripack_double:stripack/stripackd.f90
             integer :: n0
@@ -141,7 +141,7 @@ python module stripack_double ! in
             integer dimension(*) :: list
             integer dimension(*),intent(in) :: lptr
             integer dimension(*) :: lend
-            integer optional,check(len(npts)>=l),depend(npts) :: l=len(npts)
+            integer optional,intent(in),check(len(npts)>=l),depend(npts) :: l=len(npts)
             integer dimension(l),intent(inout) :: npts
             double precision intent(out) :: df
             integer intent(out) :: ier
@@ -217,17 +217,18 @@ python module stripack_double ! in
             integer :: nbcnt
         end function nbcnt
         function nearnd(p,ist,n,x,y,z,list,lptr,lend,al) ! in :stripack_double:stripack/stripackd.f90
-            double precision dimension(3) :: p
-            integer :: ist
-            integer optional,check(len(x)>=n),depend(x) :: n=len(x)
-            double precision dimension(n) :: x
-            double precision dimension(n),depend(n) :: y
-            double precision dimension(n),depend(n) :: z
+            intent(out) nearnd
+            double precision dimension(3),intent(in) :: p
+            integer intent(in) :: ist
+            integer optional,intent(in),check(len(x)>=n),depend(x) :: n=len(x)
+            double precision dimension(n),intent(in) :: x
+            double precision dimension(n),intent(in),depend(n) :: y
+            double precision dimension(n),intent(in),depend(n) :: z
             integer dimension(6 * n - 12),depend(n) :: list
-            integer dimension(6 * n - 12),depend(n) :: lptr
-            integer dimension(n),depend(n) :: lend
-            double precision :: al
-            integer :: nearnd
+            integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
+            integer dimension(n),intent(in),depend(n) :: lend
+            double precision intent(out) :: al
+            integer intent(out) :: nearnd
         end function nearnd
         subroutine optim(x,y,z,na,list,lptr,lend,nit,iwk,ier) ! in :stripack_double:stripack/stripackd.f90
             double precision dimension(*) :: x
@@ -242,12 +243,12 @@ python module stripack_double ! in
             integer :: ier
         end subroutine optim
         subroutine scoord(px,py,pz,plat,plon,pnrm) ! in :stripack_double:stripack/stripackd.f90
-            double precision :: px
-            double precision :: py
-            double precision :: pz
-            double precision :: plat
-            double precision :: plon
-            double precision :: pnrm
+            double precision intent(in) :: px
+            double precision intent(in) :: py
+            double precision intent(in) :: pz
+            double precision intent(out) :: plat
+            double precision intent(out) :: plon
+            double precision intent(out) :: pnrm
         end subroutine scoord
         function store(x) ! in :stripack_double:stripack/stripackd.f90
             double precision :: x
@@ -279,8 +280,8 @@ python module stripack_double ! in
         end subroutine timestamp
         subroutine trans(n,rlat,rlon,x,y,z) ! in :stripack_double:stripack/stripackd.f90
             integer optional,intent(in),check(len(rlat)>=n),depend(rlat) :: n=len(rlat)
-            double precision dimension(n),intent(in) :: rlat
-            double precision dimension(n),intent(in),depend(n) :: rlon
+            double precision dimension(n) :: rlat
+            double precision dimension(n),depend(n) :: rlon
             double precision dimension(n),intent(out),depend(n) :: x
             double precision dimension(n),intent(out),depend(n) :: y
             double precision dimension(n),intent(out),depend(n) :: z
@@ -369,26 +370,26 @@ python module stripack_double ! in
             integer dimension(6 * n - 12),depend(n) :: lptr
             integer dimension(6 * n - 12),depend(n) :: listc
         end subroutine voronoi_poly_count
-        subroutine vrplot(lun,pltsiz,elat,elon,a,n,x,y,z,nt,listc,lptr,lend,xc,yc,zc,title,numbr,ier) ! in :stripack_double:stripack/stripackd.f90
-            integer :: lun
-            double precision :: pltsiz
-            double precision :: elat
-            double precision :: elon
-            double precision :: a
-            integer optional,check(len(x)>=n),depend(x) :: n=len(x)
-            double precision dimension(n) :: x
-            double precision dimension(n),depend(n) :: y
-            double precision dimension(n),depend(n) :: z
-            integer optional,check((len(listc))/(3)>=nt),depend(listc) :: nt=(len(listc))/(3)
-            integer dimension(3 * nt) :: listc
-            integer dimension(6 * n - 12),depend(n) :: lptr
-            integer dimension(n),depend(n) :: lend
-            double precision dimension(nt),depend(nt) :: xc
-            double precision dimension(nt),depend(nt) :: yc
-            double precision dimension(nt),depend(nt) :: zc
-            character*(*) :: title
-            logical :: numbr
-            integer :: ier
+        subroutine vrplot(filename,pltsiz,elat,elon,a,n,x,y,z,nt,listc,lptr,lend,xc,yc,zc,title,numbr,ier) ! in :stripack_double:stripack/stripackd.f90
+            character*(*) intent(in) :: filename
+            double precision intent(in) :: pltsiz
+            double precision intent(in) :: elat
+            double precision intent(in) :: elon
+            double precision intent(in) :: a
+            integer optional,intent(in),check(len(x)>=n),depend(x) :: n=len(x)
+            double precision dimension(n),intent(in) :: x
+            double precision dimension(n),intent(in),depend(n) :: y
+            double precision dimension(n),intent(in),depend(n) :: z
+            integer optional,intent(in),check((len(listc))/(3)>=nt),depend(listc) :: nt=(len(listc))/(3)
+            integer dimension(3 * nt),intent(in) :: listc
+            integer dimension(6 * n - 12),intent(in),depend(n) :: lptr
+            integer dimension(n),intent(in),depend(n) :: lend
+            double precision dimension(nt),intent(in),depend(nt) :: xc
+            double precision dimension(nt),intent(in),depend(nt) :: yc
+            double precision dimension(nt),intent(in),depend(nt) :: zc
+            character*(*) intent(in) :: title
+            logical intent(in) :: numbr
+            integer intent(out) :: ier
         end subroutine vrplot
     end interface 
 end python module stripack_double

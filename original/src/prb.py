@@ -403,21 +403,36 @@ print '  Number of triangles =      ', nt
   iwk(1) = n0
   ds(1) = -1.0E+00
   ksum = n0
+'''
+n0 = n/2
+iwk[0] = n0
+ds[0] = -1.0
+ksum = n0
 
+'''
   do k = 2, n
-
     call getnp ( x, y, z, list, lptr, lend, k, iwk, ds(k), ier )
-dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
     if ( ier /= 0  .or.  ds(k) < ds(k-1) ) then
       write ( *, '(a)' ) ' '
       write ( *, '(a)' ) 'STRIPACK_PRB - Fatal error!'
       write ( *, '(a)' ) '  Error in GETNP.'
       stop
     end if
-
     ksum = ksum + iwk(k)
-
   end do
+'''
+
+for k in np.arange(1,n):
+    ds[k], ier = sp.getnp(x,y,z,list,lptr,lend,iwk,k+1)
+    if ier != 0 or ds[k] < ds[k-1]:
+        print ' '
+        print 'STRIPACK_PRB - Fatal error!'
+        print '  Error in GETNP.'
+        #raise RuntimeError('Error in GETNP')
+    ksum += iwk[k]
+
+'''
+
 #!
 #!  Test for all nodal indexes included in IWK.
 #!
@@ -427,6 +442,16 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #    write ( *, '(a)' ) '  Error in GETNP.'
 #    stop
 #  end if
+'''
+
+if ksum != (n*(n+1))/2 :
+    print ksum, '!=', (n*(n+1))/2
+    print 'STRIPACK_PRB - Fatal error!'
+    print '  Error in GETNP.'
+    raise RuntimeError('Error in GETNP') 
+
+'''
+
 #!
 #!  Test NEARND by verifying that the nearest node to K is
 #!  node K for K = 1 to N.
@@ -447,6 +472,26 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #    end if
 #
 #  end do
+'''
+for k in range(n):
+
+    p[0] = x[k]
+    p[1] = y[k]
+    p[2] = z[k]
+    al = 10.**6
+    
+    n0,al = sp.nearnd(p,k,x,y,z,list,lptr,lend)
+    #print n0, al
+    #if n0 != k+1 or al > 0.001 :
+    #    print ' '
+    #    print 'STRIPACK_PRB - Fatal error!'
+    #    print '  Error in NEARND.'
+    #    raise RuntimeError('Error in NEARND')
+
+#
+#  end do
+'''
+
 #!
 #!  Test DELARC by removing a boundary arc if possible.
 #!  The last two nodes define a boundary arc
@@ -455,14 +500,22 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #  n1 = n-1
 #  n2 = n
 #  call delarc ( n, n1, n2, list, lptr, lend, lnew, ier )
-#
+'''
+n1 = n-1
+n2 = n
+list,lptr,lend,lnew,ier = sp.delarc(n1,n2,list,lptr,lend,lnew)
+'''
 #  if ( ier == 1  .or.  ier == 4 ) then
 #    write ( *, '(a)' ) ' '
 #    write ( *, '(a)' ) 'STRIPACK_PRB - Warning!'
 #    write ( *, '(a,i6)' ) '  DELARC returned error code ', ier
 #    stop
 #  end if
-#
+'''
+if ier==1 or ier==3:
+    print 'STRIPACK_PRB - Warning!   DELARC returned error code ', ier
+    raise RuntimeError('Error in DELARC')
+'''
 #  if ( ier /= 0 ) then
 #
 #    write ( *, '(a)' ) ' '
@@ -475,7 +528,15 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #      ier )
 #
 #  end if
-#!
+'''
+if ier!=0:
+    print '  Subroutine DELARC was not tested.'
+    print  'Nodes ', n1, ' and ', n2, 'do not form a removable boundary arc.'
+else:
+    list,lptr,lend,lnew,ier = sp.trmesh(x,y,z)
+
+'''
+!
 #!  Test CRLIST, VRPLOT, and SCOORD by constructing and
 #!  plotting the Voronoi diagram, and printing
 #!  the Voronoi region boundary (ordered
@@ -486,6 +547,11 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #!
 #  call crlist ( n, nmax, x, y, z, list, lend, lptr, lnew, &
 #    lbtri, listc, nb, xc, yc, zc, rc, ier )
+
+'''
+lbtri,listc,nb,xc,yc,zc,rc,ier = sp.crlist(nmax,x,y,z,list,lend,lptr,lnew)
+'''
+
 #
 #  if ( ier /= 0 ) then
 #    write ( *, '(a)' ) ' '
@@ -493,20 +559,46 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #    write ( *, '(a,i6)' ) '  CRLIST returned error code ', ier
 #    stop
 #  end if
+
+'''
+if ier != 0:
+    print 'STRIPACK_PRB - Warning!  CRLIST returned error code ', ier
+    raise RuntimeError('Error in CRLIST')
+#   
+'''
+
 #!
 #!  Use the same parameter values that were used for the
 #!  triangulation plot (except the output unit and title).
 #!
 #  nt = 2 * n - 4
+
+'''
+nt = 2*n-4
+'''
+
 #
 #  vrplot_file_name = 'stripack_prb_vor.eps'
+
+'''
+vrplot_file_name = 'pystripack_prb_vor.eps'
+'''
+
 #
 #  vrplot_title = '(Voronoi diagram created by STRIPACK_PRB)'
+
+'''
+vrplot_title = '(Voronoi diagram created by STRIPACK_PRB)'
+'''
+
 #
 #  open ( lplv, file = vrplot_file_name )
 #
-#  call vrplot ( lplv, pltsiz, elat, elon, a, n, x, y, z, nt, listc, &
-#    lptr, lend, xc, yc, zc, vrplot_title, numbr, ier )
+
+'''
+ier = sp.vrplot ( vrplot_file_name, pltsiz, elat, elon, a, x, y, z, listc, lptr, lend, xc, yc, zc, vrplot_title, numbr)
+
+'''
 #
 #  if ( ier == 0 ) then
 #    write ( *, '(a)' ) ' '
@@ -518,6 +610,17 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #    write ( *, '(a,i6)' ) '  VRPLOT returned error code ', ier
 #  end if
 #
+
+'''
+if ier == 0:
+    print ''
+    print 'VRPLOT created the Voronoi plot file: ', vrplot_file_name 
+    print ''
+else:
+    print 'STRIPACK_PRB - Warning!  VRPLOT returned error code ', ier
+    raise RuntimeError('VRPLOT error')
+'''
+
 #  n0 = 1
 #
 #  write ( *, '(a)' ) ' '
@@ -526,6 +629,14 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #  write ( *, '(a)' ) '     Triangle     Latitude     Longitude' // &
 #    '     Circumradius'
 #  write ( *, '(a)' ) ' '
+
+'''
+n0 = 0
+print '  Voronoi region for node ', n0+1
+print ' '
+print '     Triangle     Latitude     Longitude     Circumradius'
+print ' '
+'''
 #!
 #!  Initialize for loop on Voronoi vertices (triangle circumcenters).  
 #!  The number of vertices is accumulated in NV, and the vertex indexes
@@ -552,6 +663,46 @@ dsa,ier = sp.getnp(x,y,z,list,lptr,lend,npts)
 #    end if
 #
 #  end do
+
+'''
+nv = 0
+lpl = lend[n0]
+lp = lpl
+'''
+#
+#  do
+#
+#    lp = lptr(lp)
+#    kt = listc(lp)
+#    nv = nv + 1
+#    iwk(nv) = kt
+#    call scoord ( xc(kt), yc(kt), zc(kt), vlat, vlon, vnrm )
+#    vlat = vlat / sc
+#    vlon = vlon / sc
+#    write ( *, '(i13,f13.6,f14.6,f17.6)' ) kt, vlat, vlon, rc(kt)
+#
+#    if ( lp == lpl ) then
+#      exit
+#    end if
+#
+#  end do
+
+'''
+while True:
+#    print lp, lptr[lp]
+    lp = lptr[lp-1]
+    kt = listc[lp-1]
+    nv = nv + 1
+    iwk[nv] = kt-1
+    vlat,vlon,vnrm = sp.scoord(xc[kt-1], yc[kt-1], zc[kt-1])
+    vlat = vlat / sc
+    vlon = vlon / sc
+    print '%13d%13.6f%14.6f%17.6f'  % (kt, vlat, vlon, rc[kt-1])
+#    write ( *, '(i13,f13.6,f14.6,f17.6)' ) kt, vlat, vlon, rc(kt)
+    if lp == lpl:
+        break
+'''
+
 #!
 #!  Test INSIDE by checking for node N0 inside its Voronoi region.
 #!

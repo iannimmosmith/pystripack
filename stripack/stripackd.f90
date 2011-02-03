@@ -73,16 +73,8 @@ subroutine addnod ( nst, k, x, y, z, list, lptr, lend, lnew, ier )
 !
   implicit none
 !
-  integer, intent (in) :: nst
-  integer, intent (in) :: k
-  double precision, intent (in) :: x(k)
-  double precision, intent (in) :: y(k)
-  double precision, intent (in) :: z(k)
-  integer, intent (inout) :: list(*)
-  integer, intent (inout) :: lptr(*)
-  integer, intent (inout) :: lend(k)
-  integer, intent (inout) :: lnew
-  integer, intent (out) :: ier
+  integer k
+!f2py intent (in) :: k
 !
   double precision b1
   double precision b2
@@ -90,6 +82,8 @@ subroutine addnod ( nst, k, x, y, z, list, lptr, lend, lnew, ier )
   integer i1
   integer i2
   integer i3
+  integer ier
+!f2py intent (out) :: ier
   integer in1
   integer io1
   integer io2
@@ -97,14 +91,30 @@ subroutine addnod ( nst, k, x, y, z, list, lptr, lend, lnew, ier )
   integer kk
   integer km1
   integer l
+  integer lend(k)
+!f2py intent (inout) :: lend
+  integer list(*)
+!f2py intent (inout) :: list
+  integer lnew
+!f2py intent (inout) :: lnew
   integer lp
   integer lpf
   integer lpr
   integer lpo1
   integer lpo1s
+  integer lptr(*)
+!f2py intent (inout) :: lptr
   integer lstptr
+  integer nst
+!f2py intent (in) :: nst
   double precision p(3)
   logical swptst
+  double precision x(k)
+!f2py intent (in) :: x
+  double precision y(k)
+!f2py intent (in) :: y
+  double precision z(k)
+!f2py intent (in) :: z
 !
   kk = k
 
@@ -264,9 +274,9 @@ function arc_cosine ( c )
 !
   implicit none
 !
-  double precision, intent(in) :: c
   double precision arc_cosine
-!
+  double precision c
+!f2py intent(in) :: c
   double precision c2
 !
   c2 = c
@@ -324,14 +334,10 @@ function areas ( v1, v2, v3 )
 !
   implicit none
 !
-  double precision, intent (in) :: v1(3)
-  double precision, intent (in) :: v2(3)
-  double precision, intent (in) :: v3(3)
-  double precision areas
-!
   double precision a1
   double precision a2
   double precision a3
+  double precision areas
   double precision ca1
   double precision ca2
   double precision ca3
@@ -345,6 +351,12 @@ function areas ( v1, v2, v3 )
   double precision u12(3)
   double precision u23(3)
   double precision u31(3)
+  double precision v1(3)
+!f2py intent (in) :: v1
+  double precision v2(3)
+!f2py intent (in) :: v2
+  double precision v3(3)
+!f2py intent (in) :: v3
 !
 ! dv1(1:3) = dble ( v1(1:3) )
 ! dv2(1:3) = dble ( v2(1:3) )
@@ -473,16 +485,22 @@ subroutine bdyadd ( kk, i1, i2, list, lptr, lend, lnew )
 !
   implicit none
 !
-  integer, intent (in) :: kk
-  integer, intent (in) :: i1
-  integer, intent (in) :: i2
-  integer, intent (inout) :: list(*)
-  integer, intent (inout) :: lptr(*)
-  integer, intent (inout) :: lend(*)
-  integer, intent (inout) :: lnew
-!
+  integer i1
+!f2py intent (in) :: i1
+  integer i2
+!f2py intent (in) :: i2
   integer k
+  integer kk
+!f2py intent (in) :: kk
+  integer lend(*)
+!f2py intent (inout) :: lend
+  integer list(*)
+!f2py intent (inout) :: list
+  integer lnew
+!f2py intent (inout) :: lnew
   integer lp
+  integer lptr(*)
+!f2py intent (inout) :: lptr
   integer lsav
   integer n1
   integer n2
@@ -603,21 +621,29 @@ subroutine bnodes ( n, list, lptr, lend, nodes, nb, na, nt )
 !
   implicit none
 !
-  integer, intent (in) :: n
-  integer, intent (in) :: list(6*(n-2))
-  integer, intent (in) :: lptr(6*(n-2))
-  integer, intent (in) :: lend(n)
-  integer, intent (out) :: nodes(n)
-  integer, intent (out) :: nb
-  integer, intent (out) :: nt
-  integer, intent (out) :: na
+  integer n
+!f2py intent (in) :: n
 !
   integer i
   integer k
+  integer lend(n)
+!f2py intent (in) :: lend
+  integer list(6*(n-2))
+!f2py intent (in) :: list
   integer lp
+  integer lptr(6*(n-2))
+!f2py intent (in) :: lptr
   integer n0
+  integer na
+!f2py intent (out) :: na
+  integer nb
+!f2py intent (out) :: nb
   integer nn
+  integer nodes(n)
+!f2py intent (out) :: nodes
   integer nst
+  integer nt
+!f2py intent (out) :: nt
 !
   nn = n
 !
@@ -722,17 +748,21 @@ subroutine circum ( v1, v2, v3, c, ier )
 !
   implicit none
 !
-  double precision, intent (in) :: v1(3)
-  double precision, intent (in) :: v2(3)
-  double precision, intent (in) :: v3(3)
-  double precision, intent (out) :: c(3)
-  integer, intent (out) :: ier
-!
+  double precision c(3)
+!f2py intent (out) :: c(3)
   double precision cnorm
   double precision cu(3)
   double precision e1(3)
   double precision e2(3)
   integer i
+  integer ier
+!f2py intent (out) :: ier
+  double precision v1(3)
+!f2py intent (in) :: v1(3)
+  double precision v2(3)
+!f2py intent (in) :: v2(3)
+  double precision v3(3)
+!f2py intent (in) :: v3(3)
 !
   ier = 0
 
@@ -1005,7 +1035,9 @@ subroutine crlist ( n, ncol, x, y, z, list, lend, lptr, lnew, &
   implicit none
 !
   integer n
+!f2py intent (in) :: n
   integer ncol
+!f2py intent (in) :: ncol
 !
   double precision c(3)
   integer i1
@@ -1013,6 +1045,7 @@ subroutine crlist ( n, ncol, x, y, z, list, lend, lptr, lnew, &
   integer i3
   integer i4
   integer ier
+!f2py intent (out) :: ier
   integer ierr
   integer kt
   integer kt1
@@ -1022,25 +1055,33 @@ subroutine crlist ( n, ncol, x, y, z, list, lend, lptr, lnew, &
   integer kt21
   integer kt22
   integer lend(n)
+!f2py intent (in) :: lend(n)
   integer list(6*(n-2))
+!f2py intent (in) :: list(6*(n-2))
   integer listc(6*(n-2))
+!f2py intent (out) :: listc(6*(n-2))
   integer lnew
+!f2py intent (inout) :: lnew
   integer lp
   integer lpl
   integer lpn
   integer lptr(6*(n-2))
+!f2py intent (inout) :: lptr(6*(n-2))
   integer lstptr
   integer ltri(6,ncol)
+!f2py intent (out) :: ltri(6,ncol)
   integer n0
   integer n1
   integer n2
   integer n3
   integer n4
   integer nb
+!f2py intent (out) :: nb
   integer nm2
   integer nn
   integer nt
   double precision rc(2*n-4)
+!f2py intent (out) :: rc(2*n-4)
   logical swp
   logical swptst
   double precision t
@@ -1048,11 +1089,17 @@ subroutine crlist ( n, ncol, x, y, z, list, lend, lptr, lnew, &
   double precision v2(3)
   double precision v3(3)
   double precision x(n)
+!f2py intent (in) :: x(n)
   double precision xc(2*n-4)
+!f2py intent (out) :: xc(2*n-4)
   double precision y(n)
+!f2py intent (in) :: y(n)
   double precision yc(2*n-4)
+!f2py intent (out) :: yc(2*n-4)
   double precision z(n)
+!f2py intent (in) :: z(n)
   double precision zc(2*n-4)
+!f2py intent (out) :: zc(2*n-4)
 !
   nn = n
   nb = 0
@@ -1622,17 +1669,25 @@ subroutine delarc ( n, io1, io2, list, lptr, lend, lnew, ier )
   implicit none
 !
   integer n
+!f2py intent (in) :: n
 !
   integer ier
+!f2py intent (out) :: ier
   integer io1
+!f2py intent (in) :: io1
   integer io2
+!f2py intent (in) ::io2
   integer lend(n)
+!f2py intent (in,out) :: lend(n)
   integer list(6*(n-2))
+!f2py intent (in,out) :: list(6*(n-2))
   integer lnew
+!f2py intent (in,out) :: lnew
   integer lp
   integer lph
   integer lpl
   integer lptr(6*(n-2))
+!f2py intent (in,out) :: lptr(6*(n-2))
   integer lstptr
   integer n1
   integer n2
@@ -3140,22 +3195,27 @@ subroutine getnp ( x, y, z, list, lptr, lend, l, npts, df, ier )
   implicit none
 !
   integer l
+!f2py intent (in) :: l
 !
-  double precision, intent (out) :: df
+  double precision df
+!f2py intent (out) :: df
   double precision dnb
   double precision dnp
   integer i
-  integer, intent (out) :: ier
+  integer ier
+!f2py intent (out) :: ier
   integer lend(*)
   integer list(*)
   integer lp
   integer lpl
-  integer, intent (in) :: lptr(*)
+  integer lptr(*)
+!f2py intent (in) :: lptr(*)
   integer n1
   integer nb
   integer ni
   integer np
-  integer, intent(inout) :: npts(l)
+  integer npts(l)
+!f2py intent(inout) :: npts(l)
   double precision x(*)
   double precision x1
   double precision y(*)
@@ -4207,8 +4267,10 @@ function nearnd ( p, ist, n, x, y, z, list, lptr, lend, al )
 !
   integer, parameter :: lmax = 25
   integer n
+!f2py intent (in) :: n
 !
   double precision al
+!f2py intent (out) :: al
   double precision b1
   double precision b2
   double precision b3
@@ -4227,18 +4289,23 @@ function nearnd ( p, ist, n, x, y, z, list, lptr, lend, al )
   integer i2
   integer i3
   integer ist
+!f2py intent (in) :: ist
   integer l
   integer lend(n)
+!f2py intent (in) :: lend  
   integer list(6*(n-2))
   integer listp(lmax)
+!f2py intent (in) :: listp  
   integer lp
   integer lp1
   integer lp2
   integer lpl
   integer lptr(6*(n-2))
+!f2py intent (in) :: lptr
   integer lptrp(lmax)
   integer lstptr
   integer nearnd
+!f2py intent (out) :: nearnd  
   integer n1
   integer n2
   integer n3
@@ -4246,9 +4313,13 @@ function nearnd ( p, ist, n, x, y, z, list, lptr, lend, al )
   integer nr
   integer nst
   double precision p(3)
+!f2py intent (in) :: p  
   double precision x(n)
+!f2py intent (in) :: x  
   double precision y(n)
+!f2py intent (in) :: y  
   double precision z(n)
+!f2py intent (in) :: z  
 !
   nearnd = 0
   al = 0.0D+00
@@ -4693,11 +4764,17 @@ subroutine scoord ( px, py, pz, plat, plon, pnrm )
   implicit none
 !
   double precision plat
+!f2py intent (out) :: plat
   double precision plon
+!f2py intent (out) :: plon
   double precision pnrm
+!f2py intent (out) :: pnrm
   double precision px
+!f2py intent (in) :: px
   double precision py
+!f2py intent (in) :: py
   double precision pz
+!f2py intent (in) :: pz
 !
   pnrm = sqrt ( px*px + py*py + pz*pz )
 
@@ -5077,18 +5154,22 @@ subroutine trans ( n, rlat, rlon, x, y, z )
 !
   implicit none
 !
-  integer, intent (in) :: n
-  double precision, intent (in) :: rlat(n)
-  double precision, intent (in) :: rlon(n)
-  double precision, intent (out) :: x(n)
-  double precision, intent (out) :: y(n)
-  double precision, intent (out) :: z(n)
+  integer n
+!f2py intent (in) :: n
 !
   double precision cosphi
   integer i
   integer nn
   double precision phi
+  double precision rlat(n)
+  double precision rlon(n)
   double precision theta
+  double precision x(n)
+!f2py double precision, intent (out) :: x(n)
+  double precision y(n)
+!f2py double precision, intent (out) :: y(n)
+  double precision z(n)
+!f2py double precision, intent (out) :: z(n)
 !
   nn = n
 
@@ -5693,33 +5774,41 @@ subroutine trlist ( n, list, lptr, lend, nrow, nt, ltri, ier )
 !
   implicit none
 !
-  integer, intent (in) :: n
-  integer, intent (in) :: nrow
+  integer n
+!f2py intent (in) :: n
+  integer nrow
+!f2py intent (in) :: nrow
 !
   logical arcs
   integer i
   integer i1
   integer i2
   integer i3
-  integer, intent (out) :: ier
+  integer ier
+!f2py intent (out) :: ier
   integer isv
   integer j
   integer ka
   integer kn
   integer kt
-  integer, intent (in) ::  lend(n)
-  integer, intent (in) ::  list(6*(n-2))
+  integer lend(n)
+!f2py intent (in) :: lend
+  integer list(6*(n-2))
+!f2py intent (in) :: list
   integer lp
   integer lp2
   integer lpl
   integer lpln1
-  integer, intent (in) ::  lptr(6*(n-2))
-  integer, intent (out) :: ltri(nrow,2*n-4)
+  integer lptr(6*(n-2))
+!f2py intent (in) :: lptr
+  integer ltri(nrow,2*n-4)
+!f2py intent (out) :: ltri
   integer n1
   integer n2
   integer n3
   integer nm2
-  integer, intent (out) :: nt
+  integer nt
+!f2py intent (out) :: nt
 !
 !  Test for invalid input parameters.
 !
@@ -5968,22 +6057,30 @@ subroutine trlprt ( n, x, y, z, iflag, nrow, nt, ltri )
 !
   implicit none
 !
-  integer, intent (in) :: n
-  integer, intent (in) :: nrow
-  integer, intent (in) :: nt
+  integer n
+!f2py intent (in) :: n
+  integer nrow
+!f2py intent (in) :: nrow
+  integer nt
+!f2py intent (in) :: nt
 !
   integer i
-  integer, intent (in) :: iflag
+  integer iflag
+!f2py intent (in) :: iflag
   integer k
-  integer, intent (in) :: ltri(nrow,nt)
+  integer ltri(nrow,nt)
+!f2py intent (in) :: ltri
   integer na
   integer nb
   integer nl
   integer, parameter :: nlmax = 58
   integer, parameter :: nmax = 9999
-  double precision, intent (in) :: x(n)
-  double precision, intent (in) :: y(n)
-  double precision, intent (in) :: z(n)
+  double precision x(n)
+!f2py intent (in) :: x
+  double precision y(n)
+!f2py intent (in) :: y
+  double precision z(n)
+!f2py intent (in) :: z
 !
 !  Print a heading and test for invalid input.
 !
@@ -6279,37 +6376,44 @@ subroutine trmesh ( n, x, y, z, list, lptr, lend, lnew, near, next, dist, ier )
 !
   implicit none
 !
-  integer, intent (in) :: n
-  double precision, intent (in) :: x(n)
-  double precision, intent (in) :: y(n)
-  double precision, intent (in) :: z(n)
-  integer, intent (out) :: list(6*(n-2))
-  integer, intent (out) :: lptr(6*(n-2))
-  integer, intent (out) :: lend(n)
-  integer, intent (out) :: lnew
-! workspace variables
-  integer near(n)
-  integer next(n)
-  double precision dist(n)
-! Tell f2py these are workspace variables
-!f2py integer, intent(hide, cache) :: near
-!f2py integer, intent(hide, cache) :: next
-!f2py double precision, intent(hide, cache) :: dist
-  integer, intent (out) :: ier
+  integer n
+!f2py intent (in) :: n
 !
   double precision d
   double precision d1
   double precision d2
   double precision d3
+  double precision dist(n)
+!f2py intent(hide, cache) :: dist
   integer i
   integer i0
+  integer ier
+!f2py intent (out) :: ier
   integer j
   integer k
   logical left
+  integer lend(n)
+!f2py intent (out) :: lend
+  integer list(6*(n-2))
+!f2py intent (out) :: list
+  integer lnew
+!f2py intent (out) :: lnew
   integer lp
   integer lpl
+  integer lptr(6*(n-2))
+!f2py intent (out) :: lptr
+  integer near(n)
+!f2py intent(hide, cache) :: near
+  integer next(n)
+!f2py intent(hide, cache) :: next
   integer nexti
   integer nn
+  double precision x(n)
+!f2py intent (in) :: x
+  double precision y(n)
+!f2py intent (in) :: y
+  double precision z(n)
+!f2py intent (in) :: z
 !
   nn = n
 
@@ -6666,36 +6770,45 @@ subroutine trplot ( filename, pltsiz, elat, elon, a, n, x, y, z, list, lptr, &
 !
   implicit none
 !
-  integer, intent (in) :: n
+  integer n
+!f2py intent (in) :: n
 !
   double precision a
   logical, parameter :: annot = .true.
   double precision cf
   double precision ct
-  double precision, intent (in) :: elat
-  double precision, intent (in) :: elon
+  double precision elat
+!f2py intent (in) :: elat
+  double precision elon
+!f2py intent (in) :: elon
   double precision ex
   double precision ey
   double precision ez
-  character ( len = * ), intent (in) :: filename
+  character ( len = * ) filename
+!f2py intent (in) :: filename
   double precision, parameter :: fsizn = 10.0D+00
   double precision, parameter :: fsizt = 16.0D+00
-  integer, intent (out) :: ier
+  integer ier
+!f2py intent (out) :: ier
   integer ipx1
   integer ipx2
   integer ipy1
   integer ipy2
   integer ir
-  integer, intent (in) :: lend(n)
-  integer, intent (in) :: list(6*(n-2))
+  integer lend(n)
+!f2py intent (in) :: lend
+  integer list(6*(n-2))
+!f2py intent (in) :: list
   integer lp
   integer lpl
-  integer, intent (in) :: lptr(6*(n-2))
+  integer lptr(6*(n-2))
+!f2py intent (in) :: lptr
   integer, parameter :: lun = 7
   integer n0
   integer n1
   logical numbr
-  double precision, intent (in) :: pltsiz
+  double precision pltsiz
+!f2py intent (in) :: pltsiz
   double precision r11
   double precision r12
   double precision r21
@@ -6703,18 +6816,22 @@ subroutine trplot ( filename, pltsiz, elat, elon, a, n, x, y, z, list, lptr, &
   double precision r23
   double precision sf
   double precision t
-  character ( len = * ), intent (in) :: title
+  character ( len = * ) title
+!f2py intent (in) :: title
   double precision tx
   double precision ty
   double precision wr
   double precision wrs
-  double precision, intent (in) :: x(n)
+  double precision x(n)
+!f2py intent (in) :: x
   double precision x0
   double precision x1
-  double precision, intent (in) :: y(n)
+  double precision y(n)
+!f2py intent (in) :: y
   double precision y0
   double precision y1
-  double precision, intent (in) :: z(n)
+  double precision z(n)
+!f2py intent (in) :: z
   double precision z0
   double precision z1
 !
@@ -7064,17 +7181,22 @@ subroutine trprnt ( n, x, y, z, iflag, list, lptr, lend )
 !
   implicit none
 !
-  integer, intent (in) :: n
+  integer n
+!f2py intent (in) :: n
 !
   integer i
-  integer, intent (in) :: iflag
+  integer iflag
+!f2py intent (in) :: iflag
   integer inc
   integer k
   integer lend(n)
-  integer, intent (in) :: list(6*(n-2))
+  integer list(6*(n-2))
+!f2py intent (in) :: list
   integer lp
   integer lpl
-  integer, intent (in) ::  lptr(6*(n-2))
+  integer lptr(6*(n-2))
+!f2py intent (in) ::  lptr
+  integer, parameter :: lun = 7
   integer na
   integer nabor(400)
   integer nb
@@ -7085,9 +7207,12 @@ subroutine trprnt ( n, x, y, z, iflag, list, lptr, lend )
   integer nn
   integer node
   integer nt
-  double precision, intent (in) :: x(n)
-  double precision, intent (in) :: y(n)
-  double precision, intent (in) :: z(n)
+  double precision x(n)
+!f2py intent (in) :: x
+  double precision y(n)
+!f2py intent (in) :: y
+  double precision z(n)
+!f2py intent (in) :: z
 !
   nn = n
 !
@@ -7410,8 +7535,12 @@ subroutine voronoi_poly_count ( n, lend, lptr, listc )
 
   return
 end
-subroutine vrplot ( lun, pltsiz, elat, elon, a, n, x, y, z, nt, listc, lptr, &
+!subroutine vrplot ( lun, pltsiz, elat, elon, a, n, x, y, z, nt, listc, lptr, &
+!  lend, xc, yc, zc, title, numbr, ier)
+subroutine vrplot ( filename, pltsiz, elat, elon, a, n, x, y, z, nt, listc, lptr, &
   lend, xc, yc, zc, title, numbr, ier)
+! The input LUN is dropped in preference for the output filename which we will OPEN here 
+
 !
 !*******************************************************************************
 !
@@ -7555,20 +7684,28 @@ subroutine vrplot ( lun, pltsiz, elat, elon, a, n, x, y, z, nt, listc, lptr, &
   implicit none
 !
   integer n
+!f2py intent (in) :: n
   integer nt
+!f2py intent (in) :: nt
 !
   double precision a
+!f2py intent (in) :: a
   logical, parameter :: annot = .true.
   double precision cf
   double precision ct
   double precision elat
+!f2py intent (in) :: elat
   double precision elon
+!f2py intent (in) :: elon
   double precision ex
   double precision ey
   double precision ez
+  character ( len = * ) filename
+!f2py intent (in) :: filename
   double precision, parameter :: fsizn = 10.0D+00
   double precision, parameter :: fsizt = 16.0D+00
   integer ier
+!f2py intent (out) :: ier
   logical in1
   logical in2
   integer ipx1
@@ -7579,14 +7716,19 @@ subroutine vrplot ( lun, pltsiz, elat, elon, a, n, x, y, z, nt, listc, lptr, &
   integer kv1
   integer kv2
   integer lend(n)
+!f2py intent (in) :: lend(n)
   integer listc(3*nt)
+!f2py intent (in) :: listc(3*nt)
   integer lp
   integer lpl
   integer lptr(6*(n-2))
-  integer lun
+!f2py intent (in) :: lptr(6*(n-2))
+  integer, parameter :: lun = 7
   integer n0
   logical numbr
+!f2py intent (in) :: numbr
   double precision pltsiz
+!f2py intent (in) :: pltsiz
   double precision r11
   double precision r12
   double precision r21
@@ -7595,24 +7737,31 @@ subroutine vrplot ( lun, pltsiz, elat, elon, a, n, x, y, z, nt, listc, lptr, &
   double precision sf
   double precision t
   character ( len = * ) title
+!f2py intent (in) :: title
   double precision tx
   double precision ty
   double precision wr
   double precision wrs
   double precision x(n)
+!f2py intent (in) :: x(n)
   double precision x0
   double precision x1
   double precision x2
   double precision xc(nt)
+!f2py intent (in) :: xc(nt)
   double precision y(n)
+!f2py intent (in) :: y(n)
   double precision y0
   double precision y1
   double precision y2
   double precision yc(nt)
+!f2py intent (in) :: yc(nt)
   double precision z(n)
+!f2py intent (in) :: z(n)
   double precision z1
   double precision z2
   double precision zc(nt)
+!f2py intent (in) :: zc(nt)
 !
   ier = 0
 !
@@ -7656,6 +7805,7 @@ subroutine vrplot ( lun, pltsiz, elat, elon, a, n, x, y, z, nt, listc, lptr, &
 !
 !  Output header comments.
 !
+  open(lun, file = filename)
   write ( lun, '(a)' ) '%!ps-adobe-3.0 epsf-3.0'
   write ( lun, '(a,4i4)' ) '%%boundingbox: ', ipx1, ipy1, ipx2, ipy2
   write ( lun, '(a)' ) '%%title:  voronoi diagram'
